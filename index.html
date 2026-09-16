@@ -88,21 +88,28 @@
   </div>
 
   <!-- Mobile Drawer Menu -->
-  <div class="mobile-overlay" id="mobile-overlay"></div>
-  <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-      <div style="font-weight: 800; font-size: 1.1rem; color: #ffffff;">Menu</div>
-      <button id="mobile-close"
-        style="background:none; border:none; color: var(--text-muted); cursor: pointer; padding: 4px;">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-    </div>
+  <div class="mobile-menu-overlay" id="mobile-overlay"></div>
+  <aside class="mobile-menu" id="mobile-menu" aria-label="Mobile Navigation">
+    <div>
+      <div class="mobile-menu-top">
+        <div class="brand-logo">
+          <div class="brand-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            </svg>
+          </div>
+          <span>sukunix<span style="color: var(--brand-blue);">.com</span></span>
+        </div>
+        <button id="mobile-close" style="background:none; color:var(--text-muted); cursor:pointer;"
+          aria-label="Close Navigation Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
 
-    <div class="mobile-links">
-      <nav style="display: flex; flex-direction: column; gap: 16px;">
+      <nav class="mobile-nav-links">
         <a href="#services" class="nav-link">Capabilities</a>
         <a href="#estimator" class="nav-link">Scope Estimator</a>
         <a href="#work" class="nav-link">Case Studies</a>
@@ -124,20 +131,22 @@
   <!-- =========================================================================
        2. Hero Section With Interactive Code & Telemetry Sandbox
        ========================================================================= -->
-  <section class="hero-section" id="hero">
-    <div class="container hero-layout">
-      <!-- Left Column: Copy & Value Proposition -->
-      <div class="hero-copy">
-        <div class="hero-eyebrow">
-          <span class="status-indicator"></span>
-          <span>Enterprise Engineering Pods Available &bull; Q3 Allocation</span>
+  <section class="hero-section bg-tech-grid" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <!-- Live Status Pill -->
+        <div class="hero-badge-container">
+          <div class="status-pill">
+            <span class="pulse-dot"></span>
+            <span>Enterprise Engineering Pods Available &bull; Q3 Allocation</span>
+          </div>
         </div>
 
         <h1 class="hero-title">
           Architecting Resilient Software, Distributed Systems &amp; Next-Gen Cloud
         </h1>
 
-        <p class="hero-subtitle">
+        <p class="hero-desc">
           Sukunix is an elite software engineering studio. We build enterprise backends, real-time data pipelines, and
           mission-critical digital infrastructure that scales seamlessly without downtime or architectural debt.
         </p>
