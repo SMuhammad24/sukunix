@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sukunix.com | Enterprise Software Engineering, Cloud & IT Solutions</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Sukunix is a premier software engineering and cloud solutions consultancy. We engineer high-throughput web systems, distributed microservices, and AI-enabled platforms for global enterprises.">
+  <meta name="keywords"
+    content="Software Agency, IT Solutions, Cloud Engineering, DevOps, Microservices, Custom Web Apps, Sukunix">
+  <meta name="author" content="Sukunix Technologies">
+  <meta name="theme-color" content="#090d1a">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sukunix.com/">
+  <meta property="og:title" content="Sukunix | Enterprise Software Engineering & Cloud Solutions">
+  <meta property="og:description"
+    content="Architecting resilient software, cloud backends, and digital solutions for market leaders.">
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+  <!-- =========================================================================
+       1. Header & Navigation
+       ========================================================================= -->
+  <div class="navbar-wrapper">
+    <div class="container">
+      <header class="navbar">
+        <!-- Brand Logo -->
+        <a href="#hero" class="brand-logo" aria-label="Sukunix Homepage">
+          <div class="brand-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <span>sukunix<span style="color: var(--brand-blue);">.com</span></span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="nav-links" aria-label="Main Navigation">
+          <a href="#services" class="nav-link">Services</a>
+          <a href="#why-us" class="nav-link">Why Sukunix</a>
+          <a href="#estimator" class="nav-link">Scope Estimator</a>
+          <a href="#work" class="nav-link">Case Studies</a>
+          <a href="#tech" class="nav-link">Tech Stack</a>
+          <a href="#process" class="nav-link">Process</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+
+        <!-- CTA & Mobile Toggle -->
+        <div class="nav-cta" style="display: flex; align-items: center; gap: 12px;">
+          <button type="button" class="btn btn-primary trigger-booking-modal" style="padding: 10px 18px; font-size: 0.86rem; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>Book Consultation</span>
+          </button>
+          <button class="mobile-toggle" id="mobile-toggle" aria-label="Open Navigation Menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </header>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-overlay" id="mobile-overlay"></div>
+  <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+      <div style="font-weight: 800; font-size: 1.1rem; color: #ffffff;">Menu</div>
+      <button id="mobile-close"
+        style="background:none; border:none; color: var(--text-muted); cursor: pointer; padding: 4px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="mobile-links">
+      <nav style="display: flex; flex-direction: column; gap: 16px;">
+        <a href="#services" class="nav-link">Capabilities</a>
+        <a href="#estimator" class="nav-link">Scope Estimator</a>
+        <a href="#work" class="nav-link">Case Studies</a>
+        <a href="#tech" class="nav-link">Tech Stack</a>
+        <a href="#process" class="nav-link">Process</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+    </div>
+
+    <div style="padding-top: 24px; display: flex; flex-direction: column; gap: 10px;">
+      <button type="button" class="btn btn-primary trigger-booking-modal" style="width: 100%; justify-content: center; cursor: pointer;">
+        <span>Book Consultation</span>
+      </button>
+      <a href="#contact" class="btn btn-secondary" style="width: 100%; justify-content: center;">General Inquiry</a>
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       2. Hero Section With Interactive Code & Telemetry Sandbox
+       ========================================================================= -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-layout">
+      <!-- Left Column: Copy & Value Proposition -->
+      <div class="hero-copy">
+        <div class="hero-eyebrow">
+          <span class="status-indicator"></span>
+          <span>Enterprise Engineering Pods Available &bull; Q3 Allocation</span>
+        </div>
+
+        <h1 class="hero-title">
+          Architecting Resilient Software, Distributed Systems &amp; Next-Gen Cloud
+        </h1>
+
+        <p class="hero-subtitle">
+          Sukunix is an elite software engineering studio. We build enterprise backends, real-time data pipelines, and
+          mission-critical digital infrastructure that scales seamlessly without downtime or architectural debt.
+        </p>
+
+        <!-- CTA Buttons with Interactive Hover Physics -->
+        <div class="hero-actions">
+          <button type="button" class="btn btn-primary trigger-booking-modal" style="cursor: pointer;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>Book Discovery Session</span>
+          </button>
+          <a href="#estimator" class="btn btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+              <line x1="8" y1="6" x2="16" y2="6"></line>
+              <line x1="16" y1="14" x2="16" y2="14.01"></line>
+              <line x1="12" y1="14" x2="12" y2="14.01"></line>
+              <line x1="8" y1="14" x2="8" y2="14.01"></line>
+            </svg>
+            <span>Calculate Project Scope</span>
+          </a>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="hero-trust-bar">
+          <div class="trust-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#10b981">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <span><strong>4.9 / 5</strong> Client Rating (85+ CTOs)</span>
+          </div>
+          <div class="trust-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <span>100% Intellectual Property Handover</span>
+          </div>
+          <div class="trust-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>SOC2 & HIPAA Compliant Engineering</span>
+          </div>
+        </div>
+
+        <!-- Interactive Cloud & Architecture Sandbox Mockup -->
+        <div class="hero-sandbox">
+          <div class="sandbox-header">
+            <div class="sandbox-mac-dots">
+              <span class="mac-dot mac-red"></span>
+              <span class="mac-dot mac-yellow"></span>
+              <span class="mac-dot mac-green"></span>
+            </div>
+            <div class="sandbox-tabs">
+              <button class="sandbox-tab active" data-tab="go">settlement_engine.go</button>
+              <button class="sandbox-tab" data-tab="tf">cluster_infra.tf</button>
+              <button class="sandbox-tab" data-tab="py">rag_pipeline.py</button>
+            </div>
+            <div class="sandbox-badge">
+              <span class="pulse-dot"></span>
+              <span>LIVE CLUSTER (us-east-1)</span>
+            </div>
+          </div>
+
+          <div class="sandbox-content">
+            <!-- Code Editor Pane -->
+            <div class="sandbox-code-pane" id="sandbox-code">
+              <span class="code-keyword">package</span> main
+
+              <span class="code-keyword">import</span> (
+              <span class="code-str">"context"</span>
+              <span class="code-str">"github.com/sukunix/engine"</span>
+              )
+
+              <span class="code-comment">// ProcessSettlement executes zero-loss atomic verification</span>
+              <span class="code-keyword">func</span> <span class="code-fn">ProcessSettlement</span>(ctx context.Context,
+              tx *engine.Transaction) (*engine.Receipt, error) {
+              ledger := engine.<span class="code-fn">NewLedgerPool</span>(<span class="code-num">12000</span>)
+              <span class="code-keyword">if</span> err := ledger.<span class="code-fn">VerifyIdempotency</span>(tx.ID);
+              err != nil {
+              <span class="code-keyword">return</span> nil, err
+              }
+              receipt := ledger.<span class="code-fn">CommitAtomicMultiAZ</span>(ctx, tx)
+              <span class="code-keyword">return</span> receipt, nil <span class="code-comment">// Latency: 12.4ms</span>
+              }
+            </div>
+
+            <!-- Realtime Telemetry Pane -->
+            <div class="sandbox-telemetry-pane">
+              <div>
+                <div class="telemetry-header">Production Health Telemetry</div>
+                <div class="telemetry-metrics-stack">
+                  <div class="telemetry-stat-row">
+                    <span class="telemetry-label">p99 Core Latency</span>
+                    <span class="telemetry-val cyan">12.4 ms</span>
+                  </div>
+                  <div class="telemetry-stat-row">
+                    <span class="telemetry-label">Production SLA Uptime</span>
+                    <span class="telemetry-val green">99.994%</span>
+                  </div>
+                  <div class="telemetry-stat-row">
+                    <span class="telemetry-label">Active Microservice Pods</span>
+                    <span class="telemetry-val">128 Healthy</span>
+                  </div>
+                  <div class="telemetry-stat-row">
+                    <span class="telemetry-label">Throughput Capacity</span>
+                    <span class="telemetry-val">12,000+ TPS</span>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                style="font-size: 0.76rem; color: #94a3b8; padding-top: 14px; font-family: var(--font-mono); border-top: 1px solid rgba(255,255,255,0.06);">
+                ✓ Zero packet degradation &bull; Multi-AZ failover active
+              </div>
+            </div>
+          </div>
+
+          <div class="sandbox-footer-strip">
+            <div>sukunix-deploy-bot: release v4.12.0 deployed successfully to AWS EKS cluster</div>
+            <div style="color: #4ade80;">● 0 Errors / 100% Passing</div>
+          </div>
+        </div>
+
+        <!-- Metrics Banner -->
+        <div class="hero-stats-banner">
+          <div class="stat-item">
+            <span class="stat-number">150+</span>
+            <span class="stat-label">Enterprise Platforms Shipped</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">99.98%</span>
+            <span class="stat-label">Average Production SLA</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">12+</span>
+            <span class="stat-label">Years Technical Experience</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">&lt;15ms</span>
+            <span class="stat-label">Average API Latency</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. Trusted Partners (Real Enterprise SVG Marks)
+       ========================================================================= -->
+  <section class="partners-section">
+    <div class="container">
+      <p class="partners-title">Powering technology architectures across modern enterprises</p>
+      <div class="partners-slider">
+        <div class="partners-track">
+          <!-- Cloudflare -->
+          <div class="partner-logo">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+            </svg>
+            <span>CLOUDFLARE</span>
+          </div>
+          <!-- Snowflake -->
+          <div class="partner-logo">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2L9.5 7.5H14.5L12 2zm0 20l2.5-5.5H9.5L12 22zM2 12l5.5 2.5V9.5L2 12zm20 0l-5.5-2.5v5L22 12zM5.5 5.5l5.5 2.5-2.5-5.5-3 3zm13 13l-5.5-2.5 2.5 5.5 3-3zm0-13l-3-3-2.5 5.5 5.5-2.5zM5.5 18.5l3 3 2.5-5.5-5.5 2.5z" />
+            </svg>
+            <span>SNOWFLAKE</span>
+          </div>
+          <!-- Datadog -->
+          <div class="partner-logo">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+            </svg>
+            <span>DATADOG</span>
+          </div>
+          <!-- MongoDB -->
+          <div class="partner-logo">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 1.5C12 1.5 5.5 8.5 5.5 14.5C5.5 18.09 8.41 21 12 21C15.59 21 18.5 18.09 18.5 14.5C18.5 8.5 12 1.5 12 1.5ZM12 19.5V3.5C12 3.5 17 9 17 14.5C17 17.26 14.76 19.5 12 19.5Z" />
+            </svg>
+            <span>MONGODB</span>
+          </div>
+          <!-- Redis -->
+          <div class="partner-logo">
+            <svg viewBox="0 0 24 24">
+              <path d="M2 7l10-5 10 5-10 5L2 7zm0 5l10 5 10-5M2 17l10 5 10-5" />
+            </svg>
+            <span>REDIS</span>
+          </div>
+          <!-- Docker -->
+          <div class="partner-logo">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M13.5 4h-2v2h2V4zm3 0h-2v2h2V4zm-6 0h-2v2h2V4zm9 3h-2v2h2V7zm-3 0h-2v2h2V7zm-3 0h-2v2h2V7zm-3 0h-2v2h2V7zm-3 0h-2v2h2V7zm15 3.5c-.5-.3-1.5-.4-2.5-.1-.2-1.2-1-2.1-2-2.4l-.5-.1v1l.4.1c.6.2 1.1.9 1.1 1.7 0 .3-.1.6-.2.8-1.1.1-4.2.3-6.8 1.9-1.3-.8-3.1-1-4.9-.7l-.4.1.2.4c.5 1.1.7 2.3.7 3.5 0 4.1 3.4 6.8 8.4 6.8 4.7 0 8.5-2.6 8.5-7.5 0-.5 0-1-.1-1.5z" />
+            </svg>
+            <span>DOCKER</span>
+          </div>
+          <!-- Repeat for infinite marquee effect -->
+          <div class="partner-logo">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+            </svg>
+            <span>CLOUDFLARE</span>
+          </div>
+          <div class="partner-logo">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2L9.5 7.5H14.5L12 2zm0 20l2.5-5.5H9.5L12 22zM2 12l5.5 2.5V9.5L2 12zm20 0l-5.5-2.5v5L22 12zM5.5 5.5l5.5 2.5-2.5-5.5-3 3zm13 13l-5.5-2.5 2.5 5.5 3-3zm0-13l-3-3-2.5 5.5 5.5-2.5zM5.5 18.5l3 3 2.5-5.5-5.5 2.5z" />
+            </svg>
+            <span>SNOWFLAKE</span>
+          </div>
+          <div class="partner-logo">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+            </svg>
+            <span>DATADOG</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. Core Capabilities & Services
+       ========================================================================= -->
+  <section class="services-section" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Engineering Capabilities</span>
+        <h2>High-Impact Solutions Built for Scale</h2>
+        <p>From strategic system architecture to continuous deployment, we deliver robust solutions across modern
+          software and cloud environments.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Service 1 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </div>
+            <h3 class="service-title">Enterprise Software Development</h3>
+            <p class="service-desc">
+              Custom web platforms, resilient REST/GraphQL APIs, and distributed microservices engineered with
+              maintainable code and scalable database structures.
+            </p>
+          </div>
+          <div class="service-tags">
+            <span class="tag-pill">Node.js / Go</span>
+            <span class="tag-pill">PostgreSQL</span>
+            <span class="tag-pill">Microservices</span>
+          </div>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+              </svg>
+            </div>
+            <h3 class="service-title">Cloud Infrastructure & DevOps</h3>
+            <p class="service-desc">
+              Zero-downtime cloud migration, automated CI/CD deployment pipelines, container orchestration, and
+              continuous infrastructure telemetry.
+            </p>
+          </div>
+          <div class="service-tags">
+            <span class="tag-pill">AWS / Azure</span>
+            <span class="tag-pill">Docker & K8s</span>
+            <span class="tag-pill">Terraform</span>
+          </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a10 10 0 1 0 10 10H12V2z"></path>
+                <path d="M12 12L2.5 7.5"></path>
+                <path d="M12 12v10"></path>
+              </svg>
+            </div>
+            <h3 class="service-title">AI & Data Engineering</h3>
+            <p class="service-desc">
+              Integration of intelligent automation, secure large language model workflows, high-performance vector
+              search, and analytical data pipelines.
+            </p>
+          </div>
+          <div class="service-tags">
+            <span class="tag-pill">Python</span>
+            <span class="tag-pill">Vector DBs</span>
+            <span class="tag-pill">Data Pipelines</span>
+          </div>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2"></rect>
+                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+              </svg>
+            </div>
+            <h3 class="service-title">Web & Mobile Applications</h3>
+            <p class="service-desc">
+              Sub-second web and native mobile applications crafted with React Native and modern frontends, optimized
+              for smooth usability and offline sync.
+            </p>
+          </div>
+          <div class="service-tags">
+            <span class="tag-pill">React & Next.js</span>
+            <span class="tag-pill">React Native</span>
+            <span class="tag-pill">TypeScript</span>
+          </div>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </div>
+            <h3 class="service-title">Security Audits & Compliance</h3>
+            <p class="service-desc">
+              Rigorous code security audits, authentication hardening (OAuth2/SSO), compliance gap analysis, and
+              penetration vulnerability testing.
+            </p>
+          </div>
+          <div class="service-tags">
+            <span class="tag-pill">OAuth2 / SSO</span>
+            <span class="tag-pill">Zero-Trust</span>
+            <span class="tag-pill">Compliance</span>
+          </div>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon-box">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                <line x1="15" y1="9" x2="15.01" y2="9"></line>
+              </svg>
+            </div>
+            <h3 class="service-title">UI/UX & Design Systems</h3>
+            <p class="service-desc">
+              Comprehensive design systems, user journey optimization, interactive wireframes, and accessible component
+              token libraries.
+            </p>
+          </div>
+          <div class="service-tags">
+            <span class="tag-pill">Design Tokens</span>
+            <span class="tag-pill">Figma</span>
+            <span class="tag-pill">WCAG 2.1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. Why Sukunix vs Traditional IT Outsourcing (Comparison)
+       ========================================================================= -->
+  <section class="comparison-section" id="why-us">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">The Sukunix Advantage</span>
+        <h2>Engineered Differently from the Ground Up</h2>
+        <p>Why growth companies and enterprise technology leaders choose Sukunix dedicated engineering pods over
+          traditional outsourcing shops.</p>
+      </div>
+
+      <div class="comparison-table-wrapper">
+        <div class="comparison-row header-row">
+          <div>Technical Capabilities & Standards</div>
+          <div>Traditional Agency Outsourcing</div>
+          <div class="col-sukunix">Sukunix Dedicated Pods</div>
+        </div>
+
+        <div class="comparison-row">
+          <div class="col-feature">
+            <div>Engineering Team Composition</div>
+            <div class="desc">Who actually designs, writes, and tests your codebase</div>
+          </div>
+          <div class="col-traditional">
+            <span class="icon-cross">✕</span> Junior outsourced contractors with high turnover
+          </div>
+          <div class="col-sukunix">
+            <span class="icon-check">✓</span> Senior Staff Engineers & Principal Cloud Architects
+          </div>
+        </div>
+
+        <div class="comparison-row">
+          <div class="col-feature">
+            <div>Delivery Velocity & Cadence</div>
+            <div class="desc">Frequency of production-ready testable software</div>
+          </div>
+          <div class="col-traditional">
+            <span class="icon-cross">✕</span> 3-6 month waterfall cycles with surprise delays
+          </div>
+          <div class="col-sukunix">
+            <span class="icon-check">✓</span> 2-week agile sprints with continuous staging builds
+          </div>
+        </div>
+
+        <div class="comparison-row">
+          <div class="col-feature">
+            <div>Architecture & Resiliency</div>
+            <div class="desc">System scalability under sudden enterprise traffic spikes</div>
+          </div>
+          <div class="col-traditional">
+            <span class="icon-cross">✕</span> Brittle monoliths prone to single points of failure
+          </div>
+          <div class="col-sukunix">
+            <span class="icon-check">✓</span> Cloud-native Kubernetes & 99.99% multi-AZ SLA
+          </div>
+        </div>
+
+        <div class="comparison-row">
+          <div class="col-feature">
+            <div>IP & Code Ownership</div>
+            <div class="desc">Legal and repository rights to all deliverables</div>
+          </div>
+          <div class="col-traditional">
+            <span class="icon-cross">✕</span> Vendor lock-in & messy undocumented repositories
+          </div>
+          <div class="col-sukunix">
+            <span class="icon-check">✓</span> 100% full IP handover, clean Git, and full test suites
+          </div>
+        </div>
+
+        <div class="comparison-row">
+          <div class="col-feature">
+            <div>Communication & Alignment</div>
+            <div class="desc">Daily technical collaboration and transparency</div>
+          </div>
+          <div class="col-traditional">
+            <span class="icon-cross">✕</span> Slow email bureaucracy through non-technical PMs
+          </div>
+          <div class="col-sukunix">
+            <span class="icon-check">✓</span> Direct Slack / GitHub collaboration with lead devs
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       6. Project Scope & Cost Estimator
+       ========================================================================= -->
+  <section class="estimator-section" id="estimator">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Interactive Planning</span>
+        <h2>Estimate Project Scope & Timeline</h2>
+        <p>Configure your technical requirements below to receive a transparent estimate of development investment and
+          expected timeframe.</p>
+      </div>
+
+      <div class="estimator-wrapper">
+        <!-- Configuration Controls -->
+        <div class="estimator-config">
+          <!-- Platform Type -->
+          <div class="config-group">
+            <div class="config-label">
+              <span>1. Architecture & Platform Scope</span>
+            </div>
+            <div class="config-options-grid">
+              <div class="option-btn active" data-estimator="platform" data-value="webapp">
+                <span class="opt-title">Web Application</span>
+              </div>
+              <div class="option-btn" data-estimator="platform" data-value="mobile">
+                <span class="opt-title">Mobile App</span>
+              </div>
+              <div class="option-btn" data-estimator="platform" data-value="ai">
+                <span class="opt-title">AI / Data System</span>
+              </div>
+              <div class="option-btn" data-estimator="platform" data-value="enterprise">
+                <span class="opt-title">Cloud Infrastructure</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Design Depth -->
+          <div class="config-group">
+            <div class="config-label">
+              <span>2. Design & Interface Fidelity</span>
+            </div>
+            <div class="config-options-grid">
+              <div class="option-btn data-estimator" data-estimator="design" data-value="standard">
+                <span class="opt-title">Standard Clean UI</span>
+              </div>
+              <div class="option-btn active" data-estimator="design" data-value="bespoke">
+                <span class="opt-title">Custom Design System</span>
+              </div>
+              <div class="option-btn" data-estimator="design" data-value="premium">
+                <span class="opt-title">Enterprise Polish</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature Add-ons -->
+          <div class="config-group">
+            <div class="config-label">
+              <span>3. Core Capability Modules</span>
+            </div>
+            <div class="feature-checkboxes">
+              <label class="checkbox-card checked">
+                <input type="checkbox" data-estimator="feature" value="auth" checked>
+                <span>Authentication & Role Permissions</span>
+              </label>
+              <label class="checkbox-card">
+                <input type="checkbox" data-estimator="feature" value="ai">
+                <span>AI / Intelligent Automation</span>
+              </label>
+              <label class="checkbox-card">
+                <input type="checkbox" data-estimator="feature" value="payments">
+                <span>Payment & Invoicing Gateway</span>
+              </label>
+              <label class="checkbox-card">
+                <input type="checkbox" data-estimator="feature" value="realtime">
+                <span>Real-Time Notifications & Sync</span>
+              </label>
+              <label class="checkbox-card checked" style="grid-column: span 2;">
+                <input type="checkbox" data-estimator="feature" value="devops" checked>
+                <span>Automated CI/CD & Cloud Infrastructure Setup</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Speed / Delivery Cadence -->
+          <div class="config-group">
+            <div class="config-label">
+              <span>4. Target Delivery Pace</span>
+            </div>
+            <div class="config-options-grid">
+              <div class="option-btn active" data-estimator="timeline" data-value="standard">
+                <span class="opt-title">Standard Agile</span>
+              </div>
+              <div class="option-btn" data-estimator="timeline" data-value="accelerated">
+                <span class="opt-title">Accelerated Delivery</span>
+              </div>
+              <div class="option-btn" data-estimator="timeline" data-value="rush">
+                <span class="opt-title">Priority Sprint</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- High-Contrast Executive Summary Output Card -->
+        <div class="estimator-summary">
+          <div>
+            <h3>Estimated Investment</h3>
+            <p style="color: #94a3b8; font-size: 0.88rem;">Live ballpark calculated for production-grade engineering
+              pods.</p>
+
+            <div class="estimate-display">
+              <span class="estimate-label">Investment Bracket</span>
+              <div class="estimate-value" id="estimate-cost-display">$15,250 – $20,500</div>
+              <div class="estimate-timeline">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span id="estimate-weeks-display">7 - 9 Weeks Delivery</span>
+              </div>
+            </div>
+
+            <ul class="estimate-breakdown">
+              <li class="breakdown-item">
+                <span>Architecture</span>
+                <span id="breakdown-platform">Custom Web Application</span>
+              </li>
+              <li class="breakdown-item">
+                <span>UI System</span>
+                <span id="breakdown-design">Custom Design System</span>
+              </li>
+              <li class="breakdown-item">
+                <span>Modules Included</span>
+                <span id="breakdown-features-count">2 Modules Selected</span>
+              </li>
+              <li class="breakdown-item">
+                <span>Delivery Pace</span>
+                <span id="breakdown-timeline">Standard Agile Cadence</span>
+              </li>
+            </ul>
+          </div>
+
+          <button class="btn btn-blue" id="apply-estimate-to-form" style="width: 100%; margin-top: 20px;">
+            <span>Apply to Consultation Form</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       7. Case Studies
+       ========================================================================= -->
+  <section class="cases-section" id="work">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Case Studies</span>
+        <h2>Selected Client Engagements</h2>
+        <p>Explore how we solve complex technical problems for our enterprise and growth-stage partners.</p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="fintech">FinTech</button>
+        <button class="filter-btn" data-filter="ai">AI & Analytics</button>
+        <button class="filter-btn" data-filter="cloud">Cloud Migration</button>
+        <button class="filter-btn" data-filter="health">HealthTech</button>
+      </div>
+
+      <!-- Case Study Cards -->
+      <div class="cases-grid">
+        <!-- Case 1 -->
+        <div class="case-card" data-category="fintech">
+          <div>
+            <div class="case-top">
+              <span class="case-client">ApexPay Financial</span>
+              <span class="case-industry-tag">FinTech</span>
+            </div>
+            <h3 class="case-title">High-Throughput Global Settlement Engine</h3>
+            <p class="case-desc">
+              Engineered a multi-currency reconciliation engine processing over $40M daily volume with transaction
+              integrity and sub-20ms verification.
+            </p>
+            <div class="case-metrics-grid">
+              <div class="metric-box">
+                <div class="metric-val">12,000+</div>
+                <div class="metric-desc">TPS Capacity</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-val">99.999%</div>
+                <div class="metric-desc">Core Reliability</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-val">-64%</div>
+                <div class="metric-desc">Settlement Cost</div>
+              </div>
+            </div>
+          </div>
+          <div class="case-footer">
+            <div style="font-size: 0.8125rem; color: var(--text-muted); font-family: var(--font-mono);">Go / Redis /
+              PostgreSQL / AWS KMS</div>
+            <button class="case-link-btn" data-modal="apexpay">
+              <span>View Engagement Details</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Case 2 -->
+        <div class="case-card" data-category="ai">
+          <div>
+            <div class="case-top">
+              <span class="case-client">CognitiveOps</span>
+              <span class="case-industry-tag">AI / SaaS</span>
+            </div>
+            <h3 class="case-title">Enterprise Knowledge Search via Vector RAG</h3>
+            <p class="case-desc">
+              Built a secure retrieval-augmented generation search platform across 5M internal documents with strict
+              permissions and factual verification.
+            </p>
+            <div class="case-metrics-grid">
+              <div class="metric-box">
+                <div class="metric-val">10x</div>
+                <div class="metric-desc">Search Speed</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-val">98.4%</div>
+                <div class="metric-desc">Answer Accuracy</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-val">500k+</div>
+                <div class="metric-desc">Monthly Queries</div>
+              </div>
+            </div>
+          </div>
+          <div class="case-footer">
+            <div style="font-size: 0.8125rem; color: var(--text-muted); font-family: var(--font-mono);">Python / Qdrant
+              / FastAPI / OpenAI</div>
+            <button class="case-link-btn" data-modal="cognitiveops">
+              <span>View Engagement Details</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Case 3 -->
+        <div class="case-card" data-category="cloud">
+          <div>
+            <div class="case-top">
+              <span class="case-client">HyperScale Logistics</span>
+              <span class="case-industry-tag">Cloud Scale</span>
+            </div>
+            <h3 class="case-title">Kubernetes Multi-Region Cloud Migration</h3>
+            <p class="case-desc">
+              Modernized monolithic tracking software into cloud-native microservices orchestrated on AWS EKS across 3
+              availability zones with automated scaling.
+            </p>
+            <div class="case-metrics-grid">
+              <div class="metric-box">
+                <div class="metric-val">42%</div>
+                <div class="metric-desc">Cloud Savings</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-val">Zero</div>
+                <div class="metric-desc">Deploy Downtime</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-val">4x</div>
+                <div class="metric-desc">Release Speed</div>
+              </div>
+            </div>
+          </div>
+          <div class="case-footer">
+            <div style="font-size: 0.8125rem; color: var(--text-muted); font-family: var(--font-mono);">Kubernetes /
+              Terraform / Prometheus</div>
+            <button class="case-link-btn" data-modal="hyperscale">
+              <span>View Engagement Details</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Case 4 -->
+        <div class="case-card" data-category="health">
+          <div>
+            <div class="case-top">
+              <span class="case-client">CareStream Health</span>
+              <span class="case-industry-tag">HealthTech</span>
+            </div>
+            <h3 class="case-title">HIPAA-Compliant Telehealth Consultation Suite</h3>
+            <p class="case-desc">
+              Engineered an encrypted audio/video telemedicine application paired with electronic health records (EHR)
+              synchronization and digital prescription workflows.
+            </p>
+            <div class="case-metrics-grid">
+              <div class="metric-box">
+                <div class="metric-val">100%</div>
+                <div class="metric-desc">Audit Passed</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-val">350k+</div>
+                <div class="metric-desc">Active Patients</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-val">4.9/5</div>
+                <div class="metric-desc">User Rating</div>
+              </div>
+            </div>
+          </div>
+          <div class="case-footer">
+            <div style="font-size: 0.8125rem; color: var(--text-muted); font-family: var(--font-mono);">React Native /
+              WebRTC / Node.js</div>
+            <button class="case-link-btn" data-modal="carestream">
+              <span>View Engagement Details</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       8. Tech Matrix
+       ========================================================================= -->
+  <section class="tech-section" id="tech">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Technology Stack</span>
+        <h2>Modern, Battle-Tested Technologies</h2>
+        <p>We build with proven open standards that guarantee speed, fault-tolerance, and long-term maintainability.</p>
+      </div>
+
+      <div class="tech-grid">
+        <!-- Frontend -->
+        <div class="tech-column">
+          <div class="tech-col-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            <h3>Frontend & Mobile</h3>
+          </div>
+          <div class="tech-items-list">
+            <div class="tech-item">
+              <span class="tech-item-name">React & Next.js</span>
+              <span class="tech-item-meta">SSR / Edge</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-item-name">TypeScript</span>
+              <span class="tech-item-meta">Type Safety</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-item-name">React Native</span>
+              <span class="tech-item-meta">iOS & Android</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-item-name">HTML5 / Modern CSS</span>
+              <span class="tech-item-meta">Standards</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backend & DB -->
+        <div class="tech-column">
+          <div class="tech-col-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+              <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+            </svg>
+            <h3>Backend & Data</h3>
+          </div>
+          <div class="tech-items-list">
+            <div class="tech-item">
+              <span class="tech-item-name">Node.js & Go</span>
+              <span class="tech-item-meta">Microservices</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-item-name">PostgreSQL & Redis</span>
+              <span class="tech-item-meta">Relational / Cache</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-item-name">Apache Kafka</span>
+              <span class="tech-item-meta">Event Streaming</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-item-name">REST & GraphQL</span>
+              <span class="tech-item-meta">APIs</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cloud & DevOps -->
+        <div class="tech-column">
+          <div class="tech-col-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+            </svg>
+            <h3>Cloud & DevOps</h3>
+          </div>
+          <div class="tech-items-list">
+            <div class="tech-item">
+              <span class="tech-item-name">AWS & Azure</span>
+              <span class="tech-item-meta">Cloud Providers</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-item-name">Kubernetes & Docker</span>
+              <span class="tech-item-meta">Containers</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-item-name">Terraform</span>
+              <span class="tech-item-meta">IaC Automation</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-item-name">GitHub Actions</span>
+              <span class="tech-item-meta">CI/CD</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI & Security -->
+        <div class="tech-column">
+          <div class="tech-col-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 2a10 10 0 1 0 10 10H12V2z"></path>
+            </svg>
+            <h3>Data & Security</h3>
+          </div>
+          <div class="tech-items-list">
+            <div class="tech-item">
+              <span class="tech-item-name">Python & FastAPI</span>
+              <span class="tech-item-meta">Analytics</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-item-name">Vector Search</span>
+              <span class="tech-item-meta">Retrieval</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-item-name">OAuth2 / OIDC</span>
+              <span class="tech-item-meta">Identity</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-item-name">Data Encryption</span>
+              <span class="tech-item-meta">AES-256</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       9. Delivery Methodology
+       ========================================================================= -->
+  <section class="process-section" id="process">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Methodology</span>
+        <h2>Structured Delivery Process</h2>
+        <p>A transparent engineering workflow that guarantees projects stay strictly on schedule and meet rigorous
+          enterprise standards.</p>
+      </div>
+
+      <div class="process-steps">
+        <!-- Step 1 -->
+        <div class="step-card">
+          <span class="step-number">01</span>
+          <h3 class="step-title">Discovery</h3>
+          <p class="step-desc">Technical scoping, architectural analysis, requirements definition, and milestone
+            planning.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card">
+          <span class="step-number">02</span>
+          <h3 class="step-title">Architecture</h3>
+          <p class="step-desc">System design, database modeling, API schema definition, and interface wireframing.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card">
+          <span class="step-number">03</span>
+          <h3 class="step-title">Sprint Build</h3>
+          <p class="step-desc">Bi-weekly sprints with continuous staging builds and transparent progress reviews.</p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-card">
+          <span class="step-number">04</span>
+          <h3 class="step-title">QA & Testing</h3>
+          <p class="step-desc">Automated testing, security reviews, cross-browser validation, and load performance
+            checks.</p>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step-card">
+          <span class="step-number">05</span>
+          <h3 class="step-title">Deployment</h3>
+          <p class="step-desc">Production rollout, infrastructure observability setup, and operational handover.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       10. Testimonials
+       ========================================================================= -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Testimonials</span>
+        <h2>Client Feedback</h2>
+        <p>What engineering and product leaders say about building with Sukunix.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <!-- Testimonial 1 -->
+        <div class="testi-card">
+          <div>
+            <div class="quote-stars">★★★★★</div>
+            <p class="quote-text">
+              "Sukunix delivered our settlement pipeline on schedule with zero downtime. Their technical rigor,
+              communication, and architectural decisions were outstanding throughout the engagement."
+            </p>
+          </div>
+          <div class="testi-author">
+            <div class="author-avatar">MS</div>
+            <div>
+              <div class="author-name">Marcus Sterling</div>
+              <div class="author-role">Chief Technology Officer, ApexPay</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testi-card">
+          <div>
+            <div class="quote-stars">★★★★★</div>
+            <p class="quote-text">
+              "The search and data intelligence pipeline Sukunix built for our enterprise knowledge base is reliable and
+              fast. Their team integrates seamlessly with our internal engineering team."
+            </p>
+          </div>
+          <div class="testi-author">
+            <div class="author-avatar">ER</div>
+            <div>
+              <div class="author-name">Elena Rostova</div>
+              <div class="author-role">Head of Product, CognitiveOps</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testi-card">
+          <div>
+            <div class="quote-stars">★★★★★</div>
+            <p class="quote-text">
+              "Finding an engineering partner that writes clean, well-tested code while keeping project deadlines intact
+              is rare. Sukunix has been a dependable partner for our infrastructure needs."
+            </p>
+          </div>
+          <div class="testi-author">
+            <div class="author-avatar">DK</div>
+            <div>
+              <div class="author-name">David Kim</div>
+              <div class="author-role">VP of Engineering, HyperScale Logistics</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       11. Frequently Asked Questions (FAQ)
+       ========================================================================= -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">FAQ</span>
+        <h2>Frequently Asked Questions</h2>
+        <p>Common questions regarding our engineering engagements, delivery contracts, and security standards.</p>
+      </div>
+
+      <div class="faq-container">
+        <!-- FAQ 1 -->
+        <div class="faq-item active">
+          <button class="faq-question">
+            <span>What engagement models does Sukunix offer?</span>
+            <div class="faq-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </button>
+          <div class="faq-answer">
+            We support two core models: <strong>Dedicated Engineering Pods</strong> (a dedicated team of senior
+            architects, frontend/backend engineers, and DevOps working exclusively on your product) and
+            <strong>Fixed-Scope Milestone Engagements</strong> (ideal for clearly scoped platform builds, migrations, or
+            architectural audits).
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How do you protect intellectual property and confidentiality?</span>
+            <div class="faq-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </button>
+          <div class="faq-answer">
+            All code, intellectual property, repositories, architectural documents, and assets are 100% owned by your
+            company. We execute strict bilateral Non-Disclosure Agreements (NDAs) prior to scoping and adhere to
+            enterprise security protocols.
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How quickly can a Sukunix engineering team onboard?</span>
+            <div class="faq-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </button>
+          <div class="faq-answer">
+            Typical kickoff takes between 5 to 7 business days. Following initial scoping and environment setup, our
+            engineers integrate directly into your communication channels (Slack, Jira, GitHub) with daily asynchronous
+            standups.
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Do you provide post-launch maintenance and SLA support?</span>
+            <div class="faq-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </button>
+          <div class="faq-answer">
+            Yes. We offer continuous SLA maintenance agreements including 24/7 infrastructure observability, security
+            patching, database optimization, and guaranteed response times for mission-critical systems.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       12. Consultation & Contact Section
+       ========================================================================= -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="contact-wrapper">
+        <!-- Contact Information Column -->
+        <div class="contact-info-col">
+          <div>
+            <span class="section-tag">Direct Inquiries</span>
+            <h3>Discuss Your Project</h3>
+            <p>
+              Tell us about your technical requirements. An engineering lead will review your submission and respond
+              with a technical proposal within one business day.
+            </p>
+
+            <div class="contact-details">
+              <div class="contact-detail-item">
+                <div class="contact-detail-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                </div>
+                <div class="contact-detail-text">
+                  <h4>Email Engineering</h4>
+                  <p>contact@sukunix.com</p>
+                </div>
+              </div>
+
+              <div class="contact-detail-item">
+                <div class="contact-detail-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                    </path>
+                  </svg>
+                </div>
+                <div class="contact-detail-text">
+                  <h4>Phone</h4>
+                  <p>+1 (800) 840-7854</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="global-locations">
+            <div class="loc-title">Engineering Offices</div>
+            <div class="loc-pills">
+              <span class="loc-pill">San Francisco</span>
+              <span class="loc-pill">London</span>
+              <span class="loc-pill">Singapore</span>
+              <span class="loc-pill">Dubai</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Column -->
+        <div class="contact-form-col">
+          <div style="background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); border: 1px solid rgba(37, 99, 235, 0.2); border-radius: var(--radius-md); padding: 18px 20px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; background: var(--brand-blue); color: #fff; padding: 2px 8px; border-radius: 99px;">Fast-Track</span>
+                <span style="font-weight: 800; font-size: 0.94rem; color: var(--brand-navy);">Need Guaranteed Architect Availability?</span>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-body); margin: 0;">Reserve a dedicated 45-min Zoom deep dive. Direct calendar & Zoom credentials dispatched instantly.</p>
+            </div>
+            <button type="button" class="btn btn-primary trigger-booking-modal" style="padding: 9px 16px; font-size: 0.82rem; cursor: pointer; white-space: nowrap;">
+              <span>Book Discovery Slot</span>
+            </button>
+          </div>
+
+          <form class="contact-form" id="consultation-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="client-name">Full Name *</label>
+                <input type="text" id="client-name" class="form-input" placeholder="e.g. Sarah Jenkins" required>
+              </div>
+              <div class="form-group">
+                <label for="client-email">Work Email *</label>
+                <input type="email" id="client-email" class="form-input" placeholder="sarah@company.com" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="project-service">Capability Focus</label>
+                <select id="project-service" class="form-select">
+                  <option value="software">Enterprise Software Development</option>
+                  <option value="cloud">Cloud Infrastructure & DevOps</option>
+                  <option value="ai">AI & Data Engineering</option>
+                  <option value="mobile">Web & Mobile Applications</option>
+                  <option value="security">Security & Systems Audit</option>
+                  <option value="design">UI/UX & Product Design</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="project-budget">Estimated Budget</label>
+                <select id="project-budget" class="form-select">
+                  <option value="15k">$10,000 – $25,000</option>
+                  <option value="50k" selected>$25,000 – $75,000</option>
+                  <option value="100k">$75,000 – $150,000</option>
+                  <option value="enterprise">$150,000+ (Enterprise)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="project-message">Project Overview</label>
+              <textarea id="project-message" class="form-textarea"
+                placeholder="Describe your product requirements, infrastructure needs, or target deadlines..."
+                rows="4"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px;">
+              <span>Submit Project Inquiry</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       13. Interactive Case Study Deep-Dive Modal
+       ========================================================================= -->
+  <div class="modal-overlay" id="case-study-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div>
+          <span class="section-tag" id="modal-tag">FINTECH ENGAGEMENT</span>
+          <h3 id="modal-title" style="font-size: 1.5rem; margin-top: 6px;">Case Study Overview</h3>
+        </div>
+        <button class="modal-close-btn" id="modal-close" aria-label="Close Case Study Modal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h4>The Challenge</h4>
+          <p id="modal-challenge">Description of the architectural challenge...</p>
+        </div>
+
+        <div class="modal-metrics-banner" id="modal-metrics">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="modal-section">
+          <h4>Sukunix Engineering Solution</h4>
+          <p id="modal-solution">Description of the engineering solution and methodology...</p>
+        </div>
+
+        <div class="modal-section" style="margin-bottom: 0;">
+          <a href="#contact" class="btn btn-blue" id="modal-cta" style="width: 100%;">
+            <span>Discuss Similar Architecture With Our Team</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       13B. Paid Discovery Consultation Booking Modal (Zero No-Show Guarantee)
+       ========================================================================= -->
+  <div class="booking-modal-overlay" id="booking-modal" role="dialog" aria-modal="true" aria-labelledby="bk-modal-title">
+    <div class="booking-modal-content">
+      <!-- Modal Header -->
+      <div class="booking-modal-header">
+        <div class="booking-header-title">
+          <h3 id="bk-modal-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--brand-blue)" stroke-width="2.2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>Architecture Discovery Call</span>
+          </h3>
+          <span class="booking-guarantee-tag">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Instant Zoom Confirmation</span>
+          </span>
+        </div>
+        <button class="modal-close-btn" id="booking-modal-close" aria-label="Close Booking Dialog">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Stepper Indicator Bar -->
+      <div class="booking-stepper">
+        <div class="booking-step-indicator active" data-step="1">
+          <span class="step-num">1</span>
+          <span>Date & Slot</span>
+        </div>
+        <div class="stepper-divider"></div>
+        <div class="booking-step-indicator" data-step="2">
+          <span class="step-num">2</span>
+          <span>Contact Details</span>
+        </div>
+        <div class="stepper-divider"></div>
+        <div class="booking-step-indicator" data-step="3">
+          <span class="step-num">3</span>
+          <span>Zoom & Confirmation</span>
+        </div>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="booking-modal-body">
+        
+        <!-- STEP 1: Slot & Date Selection -->
+        <div class="booking-panel active" id="booking-panel-step1">
+          <div class="deductible-banner">
+            <div class="deductible-icon" style="color: var(--brand-blue);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+            </div>
+            <div class="deductible-content">
+              <h4>Senior Architect 1-on-1 Discovery Session</h4>
+              <p>Select your preferred date and time for a 45-minute technical discovery call. We'll analyze your requirements, architectural roadmap, and scalability bottlenecks.</p>
+            </div>
+          </div>
+
+          <!-- Timezone Selector -->
+          <div style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 20px; gap: 8px;">
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Timezone:</span>
+            <select id="booking-timezone" class="form-select" style="padding: 6px 12px; font-size: 0.82rem; width: auto;">
+              <option value="Asia/Kolkata (IST)" selected>Asia/Kolkata (IST)</option>
+              <option value="America/New_York (EST)">America/New York (EST)</option>
+              <option value="Europe/London (GMT)">Europe/London (GMT)</option>
+              <option value="Asia/Dubai (GST)">Asia/Dubai (GST)</option>
+              <option value="Asia/Singapore (SGT)">Asia/Singapore (SGT)</option>
+            </select>
+          </div>
+
+          <!-- Date Selector -->
+          <div class="slot-section-title">
+            <span>Select Consultation Date</span>
+            <span style="font-size: 0.74rem; font-weight: 600; color: var(--text-muted);">Next 14 Business Days</span>
+          </div>
+          <div class="slot-dates-scroll" id="slot-dates-list">
+            <!-- Dynamically populated by booking.js -->
+          </div>
+
+          <!-- Time Slots Grid -->
+          <div class="slot-section-title">
+            <span>Select Available Time Slot (45-Min Video Call)</span>
+          </div>
+          <div class="slot-times-grid" id="slot-times-list">
+            <!-- Dynamically populated by booking.js -->
+          </div>
+
+          <!-- Selected Slot Bar -->
+          <div class="slot-selection-summary">
+            <div>
+              <span style="display: block; font-size: 0.76rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Selected Architecture Slot:</span>
+              <span id="selected-slot-display">Please select date and time</span>
+            </div>
+            <button type="button" id="step1-next-btn" class="btn btn-primary" style="padding: 10px 22px; font-size: 0.88rem;" disabled>
+              <span>Continue to Details</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Client Details & WhatsApp Validation -->
+        <div class="booking-panel" id="booking-panel-step2">
+          <div class="deductible-banner" style="margin-bottom: 20px;">
+            <div class="deductible-icon" style="color: #10b981;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <div class="deductible-content">
+              <h4>Instant Zoom Link Delivery via WhatsApp & Email</h4>
+              <p>Your calendar invite, Zoom meeting credentials, and reminders will be delivered directly to your WhatsApp and Email simultaneously.</p>
+            </div>
+          </div>
+
+          <form id="booking-client-form">
+            <div class="booking-form-grid">
+              <div class="form-group">
+                <label for="bk-name">Your Full Name *</label>
+                <input type="text" id="bk-name" class="form-input" placeholder="e.g. Alex Morgan" required>
+              </div>
+
+              <div class="form-group">
+                <label for="bk-email">Work Email *</label>
+                <input type="email" id="bk-email" class="form-input" placeholder="alex@company.com" required>
+              </div>
+            </div>
+
+            <div class="booking-form-grid">
+              <div class="form-group">
+                <label for="bk-whatsapp">WhatsApp Phone Number *</label>
+                <div class="phone-input-group">
+                  <select id="bk-country-code" class="form-select">
+                    <option value="+91" selected>🇮🇳 +91 (India)</option>
+                    <option value="+1">🇺🇸 +1 (US / Canada)</option>
+                    <option value="+44">🇬🇧 +44 (UK)</option>
+                    <option value="+971">🇦🇪 +971 (UAE)</option>
+                    <option value="+65">🇸🇬 +65 (Singapore)</option>
+                    <option value="+61">🇦🇺 +61 (Australia)</option>
+                    <option value="+49">🇩🇪 +49 (Germany)</option>
+                  </select>
+                  <input type="tel" id="bk-whatsapp" class="form-input" placeholder="98765 43210" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="bk-company">Company / Venture Name</label>
+                <input type="text" id="bk-company" class="form-input" placeholder="Acme Corp or Stealth Startup">
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 24px;">
+              <label for="bk-service">Primary System / Architecture Need</label>
+              <select id="bk-service" class="form-select">
+                <option value="Enterprise Web System">High-Performance Enterprise Web / Mobile System</option>
+                <option value="Cloud Architecture">Cloud Architecture, Kubernetes & DevOps Migration</option>
+                <option value="AI & Vector Database">Enterprise AI, RAG & Vector Intelligence</option>
+                <option value="Fintech Microservices">Distributed Microservices & Settlement Pipelines</option>
+                <option value="Full Product Engineering">Full Product Engineering & Dedicated Pods</option>
+              </select>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 20px;">
+              <button type="button" id="step2-back-btn" class="btn btn-secondary" style="padding: 10px 20px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>Back</span>
+              </button>
+
+              <button type="submit" id="confirm-booking-btn" class="btn btn-primary" style="padding: 12px 28px; font-size: 0.94rem;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Confirm Booking & Generate Zoom</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- STEP 3: Live Confirmation Screen -->
+        <div class="booking-panel" id="booking-panel-step3">
+          <div class="confirmation-success-hero">
+            <div class="conf-check-icon">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <h3>Discovery Session Confirmed!</h3>
+            <p>Your senior architect consultation slot is locked. An instant confirmation with Zoom link has been sent to your WhatsApp and Work Email.</p>
+          </div>
+
+          <!-- WhatsApp Notification Banner -->
+          <div class="wa-status-banner">
+            <div class="wa-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <div class="wa-status-text">
+              <strong>WhatsApp Dispatched:</strong> Direct calendar & Zoom credentials dispatched to <strong id="conf-wa-target">+91 ...</strong> and copied to Sukunix Engineering Pod.
+            </div>
+          </div>
+
+          <!-- Zoom Meeting Details Card -->
+          <div class="zoom-meeting-card">
+            <div class="zoom-card-top">
+              <div class="zoom-badge">
+                <span class="pulse-dot" style="background:#60a5fa;"></span>
+                <span>OFFICIAL ZOOM MEETING READY</span>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #94a3b8;">
+                Ref: <strong id="conf-ref-id" style="color:#ffffff;">SKX-782910</strong>
+              </div>
+            </div>
+
+            <div class="zoom-grid-info">
+              <div class="zoom-info-box">
+                <span>Date & Time</span>
+                <strong id="conf-datetime">Loading...</strong>
+              </div>
+              <div class="zoom-info-box">
+                <span>Attendee</span>
+                <strong id="conf-client-name">Loading...</strong>
+              </div>
+              <div class="zoom-info-box">
+                <span>Meeting ID</span>
+                <strong id="conf-meeting-id">982 4410 8291</strong>
+              </div>
+              <div class="zoom-info-box">
+                <span>Meeting Passcode</span>
+                <strong id="conf-passcode">SKX892</strong>
+              </div>
+            </div>
+
+            <div class="zoom-link-row">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+              <div style="flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                <a href="#" id="conf-zoom-link" target="_blank" rel="noopener">https://zoom.us/j/...</a>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+              <a href="#" id="conf-direct-join-btn" target="_blank" rel="noopener" class="btn btn-primary" style="flex: 1; justify-content: center; background: #2563eb;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <span>Join Zoom Call Directly</span>
+              </a>
+
+              <button type="button" id="download-ics-btn" class="btn btn-secondary" style="flex: 1; justify-content: center; background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); color: #ffffff;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <span>Download .ics Calendar Invite</span>
+              </button>
+            </div>
+
+            <div style="margin-top: 14px;">
+              <a href="#" id="conf-wa-chat-btn" target="_blank" rel="noopener" class="btn btn-secondary" style="width: 100%; justify-content: center; background: #15803d; border-color: #22c55e; color: #ffffff; padding: 12px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                <span>Instant Connect: Open Confirmation in WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          <div style="text-align: center; padding-top: 10px;">
+            <button type="button" id="booking-modal-done-btn" class="btn btn-secondary" style="padding: 10px 32px;">
+              <span>Done / Close Window</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       14. Footer
+       ========================================================================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="brand-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              </svg>
+            </div>
+            <span>sukunix<span style="color: var(--brand-blue);">.com</span></span>
+          </div>
+          <p>Enterprise software engineering, cloud architecture, and digital solutions for market-leading companies.
+          </p>
+          <div class="footer-system-status">
+            <span class="pulse-dot"></span>
+            <span>All Global Systems Operational</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Capabilities</h4>
+          <div class="footer-links">
+            <a href="#services">Enterprise Software</a>
+            <a href="#services">Cloud Infrastructure</a>
+            <a href="#services">Data & AI Systems</a>
+            <a href="#services">Mobile Applications</a>
+            <a href="#services">Security Audits</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <div class="footer-links">
+            <a href="#work">Case Studies</a>
+            <a href="#why-us">Why Sukunix</a>
+            <a href="#process">Our Process</a>
+            <a href="#tech">Tech Stack</a>
+            <a href="#estimator">Scope Estimator</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact">Contact Us</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <div class="footer-links">
+            <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://twitter.com" target="_blank" rel="noopener">Twitter / X</a>
+            <a href="mailto:contact@sukunix.com">Email Engineering</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Sukunix Technologies Inc. All rights reserved.</div>
+        <div style="display: flex; gap: 24px;">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Security Information</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/estimator.js"></script>
+  <script src="assets/js/booking.js"></script>
+</body>
+
+</html>
