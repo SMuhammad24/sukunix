@@ -327,25 +327,30 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .brand-logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  font-size: 1.45rem;
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  color: var(--brand-navy);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
 }
 
-.brand-icon {
-  width: 38px;
+.brand-logo:hover {
+  opacity: 0.94;
+  transform: translateY(-1px);
+}
+
+.brand-logo-img {
   height: 38px;
-  background: linear-gradient(135deg, #1e293b 0%, #090d1a 100%);
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  box-shadow: 0 3px 8px rgba(9, 13, 26, 0.18);
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(9, 13, 26, 0.08));
+  transition: transform var(--transition-normal);
+}
+
+.brand-logo:hover .brand-logo-img {
+  transform: scale(1.02);
 }
 
 .nav-links {
@@ -1898,12 +1903,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-brand .brand-logo {
-  color: #ffffff;
+  display: inline-flex;
 }
 
-.footer-brand .brand-icon {
-  background: #ffffff;
-  color: #090d1a;
+.footer-brand .brand-logo-img {
+  height: 38px;
+  filter: drop-shadow(0 2px 10px rgba(0, 212, 255, 0.22));
 }
 
 .footer-brand p {
@@ -2908,6 +2913,9 @@ h1, h2, h3, h4, h5, h6 {
   }
   .zoom-grid-info {
     grid-template-columns: 1fr;
+  }
+  .brand-logo-img {
+    height: 32px;
   }
 }
 
