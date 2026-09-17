@@ -567,13 +567,241 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
   }
 
   // -------------------------------------------------------------------------
-  // 11. Initialize on DOM Ready
+  // 11. Interactive 3D Cyber Particle Mesh / Tech Globe Canvas
+  // -------------------------------------------------------------------------
+  function init3DHeroCanvas() {
+    const canvas = document.getElementById('hero-3d-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = 0;
+    let height = 0;
+    let dpr = window.devicePixelRatio || 1;
+    let isVisible = true;
+
+    function resize() {
+      const hero = canvas.parentElement;
+      width = hero.offsetWidth;
+      height = hero.offsetHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    // 3D Globe Fibonacci Distribution
+    const count = 160;
+    const points = [];
+    const radius = Math.min(width, height) * 0.44;
+
+    for (let i = 0; i < count; i++) {
+      const phi = Math.acos(1 - (2 * (i + 0.5)) / count);
+      const theta = Math.PI * (1 + Math.sqrt(5)) * i;
+      points.push({
+        x: radius * Math.sin(phi) * Math.cos(theta),
+        y: radius * Math.sin(phi) * Math.sin(theta),
+        z: radius * Math.cos(phi),
+        pulse: Math.random() * Math.PI * 2,
+        isHub: Math.random() > 0.85
+      });
+    }
+
+    let rotY = 0;
+    let rotX = 0.2;
+    let targetRotY = 0;
+    let targetRotX = 0;
+
+    const heroSection = canvas.parentElement;
+    heroSection.addEventListener('mousemove', (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      const nx = (e.clientX - rect.left) / rect.width - 0.5;
+      const ny = (e.clientY - rect.top) / rect.height - 0.5;
+      targetRotY = nx * 0.8;
+      targetRotX = -ny * 0.5;
+    });
+
+    heroSection.addEventListener('mouseleave', () => {
+      targetRotY = 0;
+      targetRotX = 0;
+    });
+
+    // Visibility Observer to conserve GPU/CPU
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+        });
+      }, { threshold: 0.1 });
+      observer.observe(heroSection);
+    }
+
+    function render() {
+      if (isVisible) {
+        ctx.clearRect(0, 0, width, height);
+
+        rotY += 0.003 + (targetRotY - (rotY % (Math.PI * 2))) * 0.02;
+        rotX += (targetRotX + 0.15 - rotX) * 0.03;
+
+        const cosY = Math.cos(rotY);
+        const sinY = Math.sin(rotY);
+        const cosX = Math.cos(rotX);
+        const sinX = Math.sin(rotX);
+
+        const cx = width * 0.5;
+        const cy = height * 0.42;
+        const fov = 750;
+
+        // Project 3D points
+        const projected = [];
+        for (let i = 0; i < points.length; i++) {
+          const p = points[i];
+
+          // Rotate Y
+          const x1 = p.x * cosY + p.z * sinY;
+          const z1 = -p.x * sinY + p.z * cosY;
+
+          // Rotate X
+          const y1 = p.y * cosX - z1 * sinX;
+          const z2 = p.y * sinX + z1 * cosX;
+
+          const scale = fov / (fov + z2 + radius);
+          const px = cx + x1 * scale;
+          const py = cy + y1 * scale;
+
+          // Depth opacity
+          const alpha = Math.max(0.05, Math.min(0.85, (z2 + radius) / (radius * 2)));
+
+          projected.push({
+            x: px,
+            y: py,
+            z: z2,
+            scale: scale,
+            alpha: alpha,
+            isHub: p.isHub,
+            pulse: p.pulse
+          });
+        }
+
+        // Draw connecting 3D lines
+        const maxDist = 82;
+        ctx.lineWidth = 0.8;
+        for (let i = 0; i < projected.length; i++) {
+          const p1 = projected[i];
+          if (p1.z < -radius * 0.5) continue;
+
+          for (let j = i + 1; j < projected.length; j++) {
+            const p2 = projected[j];
+            if (p2.z < -radius * 0.5) continue;
+
+            const dx = p1.x - p2.x;
+            const dy = p1.y - p2.y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+
+            if (d < maxDist) {
+              const lineAlpha = (1 - d / maxDist) * Math.min(p1.alpha, p2.alpha) * 0.32;
+              ctx.strokeStyle = `rgba(56, 189, 248, ${lineAlpha})`;
+              ctx.beginPath();
+              ctx.moveTo(p1.x, p1.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Draw 3D nodes
+        for (let i = 0; i < projected.length; i++) {
+          const p = projected[i];
+          p.pulse += 0.05;
+
+          const baseSize = p.isHub ? 3.5 : 2.2;
+          const size = baseSize * p.scale;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+          if (p.isHub) {
+            ctx.fillStyle = `rgba(56, 189, 248, ${p.alpha})`;
+            ctx.shadowColor = '#38bdf8';
+            ctx.shadowBlur = 8;
+          } else {
+            ctx.fillStyle = `rgba(37, 99, 235, ${p.alpha * 0.7})`;
+            ctx.shadowBlur = 0;
+          }
+          ctx.fill();
+
+          if (p.isHub && p.alpha > 0.4) {
+            const pulseRadius = size + (Math.sin(p.pulse) * 0.5 + 0.5) * 8;
+            const pulseAlpha = (1 - (pulseRadius - size) / 8) * p.alpha * 0.35;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, pulseRadius, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(74, 222, 128, ${pulseAlpha})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+        ctx.shadowBlur = 0;
+      }
+      requestAnimationFrame(render);
+    }
+
+    render();
+  }
+
+  // -------------------------------------------------------------------------
+  // 12. Interactive 3D Perspective Card Tilt Physics
+  // -------------------------------------------------------------------------
+  function init3DTiltPhysics() {
+    const tiltCards = document.querySelectorAll(
+      '.service-card, .case-card, .tech-column, .hero-sandbox'
+    );
+
+    tiltCards.forEach((card) => {
+      let isHovered = false;
+
+      card.addEventListener('mouseenter', () => {
+        isHovered = true;
+      });
+
+      card.addEventListener('mousemove', (e) => {
+        if (!isHovered) return;
+        const rect = card.getBoundingClientRect();
+        const cardX = e.clientX - rect.left;
+        const cardY = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const deltaX = (cardX - centerX) / centerX;
+        const deltaY = (cardY - centerY) / centerY;
+
+        const maxTilt = card.classList.contains('hero-sandbox') ? 3.5 : 6.5;
+        const rotX = -deltaY * maxTilt;
+        const rotY = deltaX * maxTilt;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateY(-4px) scale3d(1.012, 1.012, 1.012)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        isHovered = false;
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)';
+      });
+    });
+  }
+
+  // -------------------------------------------------------------------------
+  // 13. Initialize on DOM Ready
   // -------------------------------------------------------------------------
   document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initCodeSandbox();
     initCliTerminal();
     initSpotlightEffect();
+    init3DHeroCanvas();
+    init3DTiltPhysics();
     initCaseStudiesFilter();
     initCaseStudyModal();
     initFaqAccordion();

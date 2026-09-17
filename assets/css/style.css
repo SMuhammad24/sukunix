@@ -468,6 +468,28 @@ h1, h2, h3, h4, h5, h6 {
   background: radial-gradient(circle at 50% 10%, rgba(37, 99, 235, 0.05) 0%, transparent 60%), #ffffff;
 }
 
+/* Interactive 3D Cyber Mesh / Tech Globe Canvas */
+.hero-3d-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+/* Interactive 3D Perspective Card Tilt Physics */
+.service-card,
+.case-card,
+.tech-column,
+.hero-sandbox {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.16s ease-out, box-shadow 0.25s ease;
+}
+
 .hero-content {
   text-align: center;
   max-width: 960px;
