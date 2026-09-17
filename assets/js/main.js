@@ -150,14 +150,30 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
     <span class="code-keyword">return</span> {<span class="code-str">"status"</span>: <span class="code-str">"verified"</span>, <span class="code-str">"answer"</span>: answer.text}`
     };
 
+    const telemetryPane = document.querySelector('.sandbox-telemetry-pane');
+    const cliPane = document.getElementById('sandbox-cli');
+
     tabs.forEach((tab) => {
       tab.addEventListener('click', () => {
         tabs.forEach((t) => t.classList.remove('active'));
         tab.classList.add('active');
 
         const tabKey = tab.getAttribute('data-tab');
-        if (snippets[tabKey]) {
-          codePane.innerHTML = snippets[tabKey];
+        if (tabKey === 'cli') {
+          codePane.style.display = 'none';
+          if (telemetryPane) telemetryPane.style.display = 'none';
+          if (cliPane) {
+            cliPane.style.display = 'flex';
+            const cliInput = document.getElementById('cli-input');
+            if (cliInput) setTimeout(() => cliInput.focus(), 60);
+          }
+        } else {
+          if (cliPane) cliPane.style.display = 'none';
+          codePane.style.display = 'block';
+          if (telemetryPane) telemetryPane.style.display = 'flex';
+          if (snippets[tabKey]) {
+            codePane.innerHTML = snippets[tabKey];
+          }
         }
       });
     });
@@ -355,11 +371,209 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
   }
 
   // -------------------------------------------------------------------------
-  // 9. Initialize on DOM Ready
+  // 9. Interactive Sukunix CLI Terminal Engine
+  // -------------------------------------------------------------------------
+  function initCliTerminal() {
+    const cliInput = document.getElementById('cli-input');
+    const stdout = document.getElementById('cli-stdout');
+    const chips = document.querySelectorAll('.cli-chip');
+    if (!cliInput || !stdout) return;
+
+    const history = [];
+    let historyIdx = -1;
+
+    function appendLine(html, type = 'info') {
+      const line = document.createElement('div');
+      line.className = `cli-line cli-${type}`;
+      line.innerHTML = html;
+      stdout.appendChild(line);
+      stdout.scrollTop = stdout.scrollHeight;
+    }
+
+    function echoCommand(cmd) {
+      appendLine(
+        `<span class="cli-user">sukunix</span><span class="cli-at">@</span><span class="cli-host">prod-mesh</span><span class="cli-colon">:</span><span class="cli-path">~</span><span class="cli-dollar">$</span> <span class="cli-cmd-text">${escapeHtml(cmd)}</span>`,
+        'prompt-echo'
+      );
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function executeCommand(rawCmd) {
+      const cmd = rawCmd.trim();
+      if (!cmd) return;
+
+      history.push(cmd);
+      historyIdx = history.length;
+      echoCommand(cmd);
+
+      const normalized = cmd.toLowerCase();
+
+      if (normalized === 'clear' || normalized === 'cls') {
+        stdout.innerHTML = '';
+        return;
+      }
+
+      if (normalized === 'help' || normalized === '?') {
+        appendLine(
+          `<div><strong>Available Sukunix Developer Commands:</strong><br>
+          &bull; <span class="cli-info">sukunix deploy</span> - Simulate high-throughput AWS EKS cluster deployment<br>
+          &bull; <span class="cli-info">sukunix audit</span> - Run automated SOC2/HIPAA security &amp; p99 latency scan<br>
+          &bull; <span class="cli-info">sukunix estimate</span> - Calculate architectural scope &amp; sprint timelines<br>
+          &bull; <span class="cli-info">sukunix book-call</span> - Open Senior Architect Discovery Consultation modal<br>
+          &bull; <span class="cli-info">sukunix status</span> - Telemetry health check of all microservice pods<br>
+          &bull; <span class="cli-info">clear</span> - Clear terminal output buffer</div>`,
+          'info'
+        );
+        return;
+      }
+
+      if (normalized.startsWith('sukunix deploy') || normalized === 'deploy') {
+        appendLine(`<span class="cli-info">⚡ Initializing multi-region Kubernetes deployment pipeline...</span>`, 'info');
+        setTimeout(() => {
+          appendLine(`✔ Connecting to AWS EKS cluster (us-east-1, eu-central-1)...`, 'success');
+        }, 220);
+        setTimeout(() => {
+          appendLine(`✔ Provisioning 64 high-throughput distributed worker pods &bull; Auto-scale: Active`, 'success');
+        }, 500);
+        setTimeout(() => {
+          appendLine(`✔ Zero-loss database replica verification (PostgreSQL Multi-AZ): PASS`, 'success');
+        }, 780);
+        setTimeout(() => {
+          appendLine(`✔ Global Cloudflare Edge Proxy routed &bull; Core latency: <strong>11.8ms</strong>`, 'success');
+          appendLine(`🚀 <strong style="color:#38bdf8;">DEPLOYMENT COMPLETE:</strong> Production cluster 100% operational with 0 downtime.`, 'info');
+        }, 1050);
+        return;
+      }
+
+      if (normalized.startsWith('sukunix audit') || normalized === 'audit') {
+        appendLine(`<span class="cli-info">🛡️ Starting automated enterprise security &amp; performance audit...</span>`, 'info');
+        setTimeout(() => {
+          appendLine(`✔ TLS 1.3 Strict Transport Security &amp; mTLS Mesh: <strong>PASS</strong>`, 'success');
+        }, 220);
+        setTimeout(() => {
+          appendLine(`✔ Zero-Trust IAM &amp; Secret Vault Encryption (AES-256): <strong>PASS</strong>`, 'success');
+        }, 500);
+        setTimeout(() => {
+          appendLine(`✔ OWASP Top-10 &amp; SQL Injection Attack Vector Scan: <strong>0 Vulnerabilities Found</strong>`, 'success');
+        }, 780);
+        setTimeout(() => {
+          appendLine(`✔ p99 Latency SLA benchmark (100k simulated requests): <strong>14.2ms</strong>`, 'success');
+          appendLine(`🏆 <strong style="color:#4ade80;">SECURITY AUDIT RESULT:</strong> Enterprise Grade A+ &bull; SOC2 / HIPAA Compliant.`, 'success');
+        }, 1050);
+        return;
+      }
+
+      if (normalized.startsWith('sukunix estimate') || normalized === 'estimate') {
+        appendLine(`<span class="cli-info">📊 Running Sukunix Algorithmic Scope Estimator...</span>`, 'info');
+        setTimeout(() => {
+          appendLine(`<div><strong>Architectural Delivery Estimates:</strong><br>
+          &bull; Distributed Microservices &amp; API Mesh: <strong>4 &ndash; 6 Weeks</strong><br>
+          &bull; Cloud Infrastructure &amp; Multi-AZ CI/CD: <strong>2 &ndash; 3 Weeks</strong><br>
+          &bull; AI / Vector RAG Pipeline Integration: <strong>3 &ndash; 4 Weeks</strong><br>
+          &bull; Team: 1 Senior Principal Architect + 3 Dedicated Staff Pod Engineers<br>
+          💡 <em>Tip: Use 'sukunix book-call' or click the estimator to lock your sprint slot.</em></div>`, 'info');
+        }, 350);
+        return;
+      }
+
+      if (normalized.startsWith('sukunix book') || normalized === 'book') {
+        appendLine(`<span class="cli-info">📅 Launching Senior Architect Discovery Consultation Portal...</span>`, 'info');
+        setTimeout(() => {
+          appendLine(`✔ Zoom credentials generated &bull; Opening schedule modal...`, 'success');
+          const modalTrigger = document.querySelector('.trigger-booking-modal');
+          if (modalTrigger) modalTrigger.click();
+        }, 400);
+        return;
+      }
+
+      if (normalized.startsWith('sukunix status') || normalized === 'status') {
+        appendLine(
+          `<div><strong>Production Health Telemetry (Live us-east-1):</strong><br>
+          &bull; Status: <span class="cli-success">Operational (0 Incidents)</span><br>
+          &bull; Uptime SLA: <span class="cli-success">99.994%</span><br>
+          &bull; Active Pods: <span class="cli-info">128 Healthy Containers</span><br>
+          &bull; Current Throughput: <span class="cli-info">12,480 TPS</span><br>
+          &bull; p99 Core Latency: <span class="cli-success">12.4ms</span></div>`,
+          'info'
+        );
+        return;
+      }
+
+      appendLine(
+        `<span class="cli-warn">sukunix: command not found: "${escapeHtml(cmd)}". Type 'help' to see available commands.</span>`,
+        'warn'
+      );
+    }
+
+    cliInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const val = cliInput.value;
+        cliInput.value = '';
+        executeCommand(val);
+      } else if (e.key === 'ArrowUp') {
+        if (history.length > 0 && historyIdx > 0) {
+          historyIdx--;
+          cliInput.value = history[historyIdx];
+        }
+      } else if (e.key === 'ArrowDown') {
+        if (historyIdx < history.length - 1) {
+          historyIdx++;
+          cliInput.value = history[historyIdx];
+        } else {
+          historyIdx = history.length;
+          cliInput.value = '';
+        }
+      }
+    });
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const cmd = chip.getAttribute('data-cmd');
+        if (cmd) {
+          cliInput.value = cmd;
+          executeCommand(cmd);
+          cliInput.value = '';
+          cliInput.focus();
+        }
+      });
+    });
+  }
+
+  // -------------------------------------------------------------------------
+  // 10. Interactive Mouse Spotlight / Flashlight Hover Physics
+  // -------------------------------------------------------------------------
+  function initSpotlightEffect() {
+    const cards = document.querySelectorAll(
+      '.spotlight-card, .service-card, .case-card, .tech-column, .stat-item, .hero-sandbox'
+    );
+
+    cards.forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.setProperty('--mouse-x', '-999px');
+        card.style.setProperty('--mouse-y', '-999px');
+      });
+    });
+  }
+
+  // -------------------------------------------------------------------------
+  // 11. Initialize on DOM Ready
   // -------------------------------------------------------------------------
   document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initCodeSandbox();
+    initCliTerminal();
+    initSpotlightEffect();
     initCaseStudiesFilter();
     initCaseStudyModal();
     initFaqAccordion();

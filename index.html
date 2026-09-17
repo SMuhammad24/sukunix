@@ -218,6 +218,7 @@
               <button class="sandbox-tab active" data-tab="go">settlement_engine.go</button>
               <button class="sandbox-tab" data-tab="tf">cluster_infra.tf</button>
               <button class="sandbox-tab" data-tab="py">rag_pipeline.py</button>
+              <button class="sandbox-tab tab-terminal-pill" data-tab="cli"><span class="terminal-tab-dot"></span>sukunix-cli (Live)</button>
             </div>
             <div class="sandbox-badge">
               <span class="pulse-dot"></span>
@@ -226,6 +227,44 @@
           </div>
 
           <div class="sandbox-content">
+            <!-- Interactive CLI Terminal Pane -->
+            <div class="sandbox-terminal-pane" id="sandbox-cli" style="display: none;">
+              <!-- Command Quick Action Chips -->
+              <div class="cli-quick-chips">
+                <span class="cli-chip-label">Quick Commands:</span>
+                <button type="button" class="cli-chip" data-cmd="sukunix deploy">sukunix deploy</button>
+                <button type="button" class="cli-chip" data-cmd="sukunix audit">sukunix audit</button>
+                <button type="button" class="cli-chip" data-cmd="sukunix estimate">sukunix estimate</button>
+                <button type="button" class="cli-chip" data-cmd="sukunix book-call">sukunix book-call</button>
+                <button type="button" class="cli-chip" data-cmd="help">help</button>
+                <button type="button" class="cli-chip cli-chip-clear" data-cmd="clear">clear</button>
+              </div>
+
+              <!-- Terminal Stdout Window -->
+              <div class="cli-terminal-window" id="cli-window">
+                <div class="cli-stdout" id="cli-stdout">
+                  <div class="cli-line cli-welcome">
+                    <span class="cli-badge">SUKUNIX DEV CLI v4.12.0</span>
+                    <span class="cli-muted">&bull; Global production edge connected &bull; Type a command or click chips</span>
+                  </div>
+                  <div class="cli-line cli-prompt-echo">
+                    <span class="cli-user">sukunix</span><span class="cli-at">@</span><span class="cli-host">prod-mesh</span><span class="cli-colon">:</span><span class="cli-path">~</span><span class="cli-dollar">$</span>
+                    <span class="cli-cmd-text">sukunix status --all</span>
+                  </div>
+                  <div class="cli-line cli-success">
+                    ✔ All 128 microservice pods healthy &bull; p99 Core Latency: 12.4ms &bull; Zero downtime
+                  </div>
+                </div>
+
+                <!-- Interactive Input Line -->
+                <div class="cli-input-row" id="cli-input-row">
+                  <span class="cli-user">sukunix</span><span class="cli-at">@</span><span class="cli-host">prod-mesh</span><span class="cli-colon">:</span><span class="cli-path">~</span><span class="cli-dollar">$</span>
+                  <input type="text" id="cli-input" class="cli-input-field" placeholder="type 'help', 'sukunix deploy', or click chips..." autocomplete="off" spellcheck="false">
+                  <span class="cli-cursor"></span>
+                </div>
+              </div>
+            </div>
+
             <!-- Code Editor Pane -->
             <div class="sandbox-code-pane" id="sandbox-code">
               <span class="code-keyword">package</span> main
