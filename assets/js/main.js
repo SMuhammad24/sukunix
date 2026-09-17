@@ -540,6 +540,24 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
         }
       });
     });
+
+    // Quick launch button from Hero CTA actions
+    const heroOpenCliBtn = document.getElementById('hero-open-cli');
+    if (heroOpenCliBtn) {
+      heroOpenCliBtn.addEventListener('click', () => {
+        const cliTab = document.querySelector('.sandbox-tab[data-tab="cli"]');
+        if (cliTab) {
+          cliTab.click();
+          const sandbox = document.querySelector('.hero-sandbox');
+          if (sandbox) {
+            sandbox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          setTimeout(() => {
+            if (cliInput) cliInput.focus();
+          }, 350);
+        }
+      });
+    }
   }
 
   // -------------------------------------------------------------------------
@@ -793,12 +811,88 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
   }
 
   // -------------------------------------------------------------------------
-  // 13. Initialize on DOM Ready
+  // 13. Scroll-Triggered Animated Counter Numbers (Metrics)
+  // -------------------------------------------------------------------------
+  function initCounterAnimation() {
+    const counterElements = document.querySelectorAll('[data-counter]');
+    if (!counterElements.length) return;
+
+    function formatNumber(value, decimals, useComma) {
+      let str = value.toFixed(decimals);
+      if (useComma) {
+        const parts = str.split('.');
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        str = parts.join('.');
+      }
+      return str;
+    }
+
+    function animateCounter(el) {
+      if (el.getAttribute('data-animated') === 'true') return;
+      el.setAttribute('data-animated', 'true');
+      el.classList.add('counting');
+
+      const target = parseFloat(el.getAttribute('data-target') || '0');
+      const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      const prefix = el.getAttribute('data-prefix') || '';
+      const suffix = el.getAttribute('data-suffix') || '';
+      const useComma = el.getAttribute('data-format') === 'comma';
+      const duration = parseInt(el.getAttribute('data-duration') || '1600', 10);
+
+      const startTime = performance.now();
+
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Smooth cubic ease out: 1 - (1 - t)^3
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const currentVal = target * ease;
+
+        el.textContent = prefix + formatNumber(currentVal, decimals, useComma) + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          el.textContent = prefix + formatNumber(target, decimals, useComma) + suffix;
+          el.classList.remove('counting');
+          el.classList.add('count-done');
+        }
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              animateCounter(entry.target);
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.15,
+          rootMargin: '0px 0px -20px 0px'
+        }
+      );
+
+      counterElements.forEach((el) => observer.observe(el));
+    } else {
+      counterElements.forEach(animateCounter);
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // 14. Initialize on DOM Ready
   // -------------------------------------------------------------------------
   document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initCodeSandbox();
     initCliTerminal();
+    initCounterAnimation();
     initSpotlightEffect();
     init3DHeroCanvas();
     init3DTiltPhysics();
