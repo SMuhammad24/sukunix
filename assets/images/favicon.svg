@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+  <style>
+    :root {
+      --icon-fill: #0c2333;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --icon-fill: #38bdf8;
+      }
+    }
+    .sukunix-mark {
+      fill: var(--icon-fill);
+    }
+  </style>
+  <g transform="translate(15, 16)">
+    <path class="sukunix-mark" fill-rule="evenodd" d="
+      M 1 1
+      L 1 70
+      L 77 118
+      L 77 223
+      L 148 223
+      L 148 118
+      L 224 70
+      L 224 1
+      L 113 55
+      Z
+      M 26 31
+      L 113 83
+      L 199 31
+      L 199 58
+      L 124 105
+      L 124 198
+      L 101 198
+      L 101 105
+      L 26 58
+      Z
+    " />
+  </g>
+</svg>
