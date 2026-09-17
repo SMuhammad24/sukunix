@@ -340,7 +340,22 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
   }
 
   // -------------------------------------------------------------------------
-  // 8. Initialize on DOM Ready
+  // 8. Footer Interactive & Back to Top
+  // -------------------------------------------------------------------------
+  function initFooterInteractions() {
+    const backToTopBtn = document.getElementById('footer-back-to-top');
+    if (backToTopBtn) {
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // 9. Initialize on DOM Ready
   // -------------------------------------------------------------------------
   document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
@@ -349,5 +364,6 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
     initCaseStudyModal();
     initFaqAccordion();
     initContactForm();
+    initFooterInteractions();
   });
 })();
