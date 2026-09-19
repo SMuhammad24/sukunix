@@ -2663,26 +2663,63 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --------------------------------------------------------------------------
-   20. Responsive Breakpoints & Mobile Optimization
+   20. Complete Enterprise Mobile Responsive System
+   Breakpoints: 1024px (Laptops/Tablets), 768px (Tablets), 640px (Mobile Landscape/Phablet),
+                480px (Standard Mobile), 360px (Compact Mobile)
    -------------------------------------------------------------------------- */
+
+/* Global Touch & Responsive Normalization */
+@media (hover: none) and (pointer: coarse) {
+  a, button, input, select, textarea, .option-btn, .slot-date-btn, .slot-time-btn, .filter-btn, .cli-chip {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Ensure inputs never trigger iOS Safari auto-zoom */
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* --- 1024px Breakpoint (Tablets Landscape & Compact Laptops) --- */
 @media (max-width: 1024px) {
+  .container {
+    max-width: 960px;
+    padding: 0 24px;
+  }
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
   .tech-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
   .process-steps {
     grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .cases-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
   .estimator-wrapper {
     grid-template-columns: 1fr;
+    gap: 32px;
   }
   .contact-wrapper {
     grid-template-columns: 1fr;
+    gap: 32px;
   }
   .footer-top {
     grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
   }
   .sandbox-content {
     grid-template-columns: 1fr;
@@ -2697,23 +2734,61 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* --- 768px Breakpoint (Tablets Portrait & Mobile) --- */
 @media (max-width: 768px) {
-  .nav-links, .nav-cta .btn {
-    display: none;
+  .container {
+    padding: 0 20px;
+  }
+
+  /* 1. Header & Navbar */
+  .navbar {
+    padding: 12px 0;
+  }
+  .nav-links {
+    display: none !important;
+  }
+  .nav-cta-btn,
+  .nav-cta .trigger-booking-modal {
+    display: none !important;
   }
   .mobile-toggle {
-    display: block;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background: var(--bg-surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    color: var(--brand-navy);
+    cursor: pointer;
   }
+  .brand-logo-img {
+    height: 28px;
+    max-width: 140px;
+    object-fit: contain;
+  }
+
+  /* 2. Hero Section */
   .hero-section {
-    padding: 56px 0 36px 0;
+    padding: 48px 0 32px 0;
+  }
+  .hero-badge {
+    padding: 6px 14px;
+    font-size: 0.78rem;
+    max-width: 100%;
+    text-align: center;
   }
   .hero-title {
-    font-size: 2.35rem;
-    line-height: 1.15;
+    font-size: clamp(2rem, 6.5vw, 2.6rem);
+    line-height: 1.16;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
   }
   .hero-desc {
-    font-size: 1.05rem;
-    margin-bottom: 30px;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 26px;
   }
   .hero-actions {
     flex-direction: column;
@@ -2722,45 +2797,100 @@ h1, h2, h3, h4, h5, h6 {
   }
   .hero-actions .btn {
     width: 100%;
+    justify-content: center;
+    min-height: 48px;
   }
   .hero-trust-bar {
-    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 18px;
     font-size: 0.8rem;
   }
   .hero-stats-banner {
     grid-template-columns: repeat(2, 1fr);
+    gap: 16px 12px;
     padding: 20px 16px;
+    margin-top: 32px;
   }
-  .stat-item:nth-child(2)::after {
-    display: none;
+  .stat-item::after {
+    display: none !important;
   }
   .stat-number {
-    font-size: 1.8rem;
+    font-size: 1.75rem;
+  }
+  .stat-label {
+    font-size: 0.74rem;
   }
 
-  /* Sandbox Mobile Fixes */
+  /* 3. Hero Sandbox & CLI Terminal */
   .hero-sandbox {
     border-radius: var(--radius-md);
     margin-top: 24px;
+    overflow: hidden;
   }
   .sandbox-header {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 12px 16px;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+  .sandbox-header-left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
   }
   .sandbox-tabs {
     width: 100%;
     overflow-x: auto;
-    padding-bottom: 4px;
+    display: flex;
+    gap: 6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .sandbox-tabs::-webkit-scrollbar {
+    display: none;
   }
   .sandbox-tab {
-    padding: 6px 10px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 0.74rem;
+  }
+  .sandbox-content {
+    grid-template-columns: 1fr;
+  }
+  .cli-chips-bar {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 6px;
+    padding: 8px 12px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .cli-chips-bar::-webkit-scrollbar {
+    display: none;
+  }
+  .cli-chip {
+    flex-shrink: 0;
+    white-space: nowrap;
     font-size: 0.72rem;
+    padding: 5px 10px;
+  }
+  .cli-stdout {
+    max-height: 180px;
+    font-size: 0.75rem;
+    padding: 12px;
+  }
+  .cli-input-row {
+    padding: 10px 12px;
+    font-size: 0.78rem;
+    gap: 6px;
   }
   .sandbox-code-pane {
     padding: 16px;
-    font-size: 0.75rem;
+    font-size: 0.74rem;
     line-height: 1.6;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -2769,74 +2899,531 @@ h1, h2, h3, h4, h5, h6 {
     padding: 18px 16px;
   }
   .telemetry-stat-row {
-    padding: 10px 12px;
+    padding: 8px 12px;
+    font-size: 0.82rem;
   }
   .telemetry-val {
     font-size: 0.95rem;
   }
   .sandbox-footer-strip {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
     font-size: 0.7rem;
-    padding: 10px 16px;
+    padding: 10px 14px;
   }
 
-  /* Other sections */
+  /* 4. Section Spacing & Headers */
+  .services-section,
+  .comparison-section,
+  .estimator-section,
+  .cases-section,
+  .tech-section,
+  .process-section,
+  .testimonials-section,
+  .faq-section,
+  .contact-section {
+    padding: 64px 0;
+  }
+  .section-header h2 {
+    font-size: clamp(1.65rem, 5vw, 2.15rem);
+    letter-spacing: -0.025em;
+  }
+  .section-header p {
+    font-size: 0.94rem;
+    margin-bottom: 32px;
+  }
+
+  /* 5. Services Grid */
   .services-grid {
     grid-template-columns: 1fr;
+    gap: 18px;
   }
-  .cases-grid {
-    grid-template-columns: 1fr;
-  }
-  .case-metrics-grid {
-    grid-template-columns: repeat(3, 1fr);
-    padding: 12px 8px;
-    gap: 6px;
-  }
-  .metric-val {
-    font-size: 1.15rem;
-  }
-  .metric-desc {
-    font-size: 0.65rem;
-  }
-  .testimonials-grid {
-    grid-template-columns: 1fr;
-  }
-  .process-steps {
-    grid-template-columns: 1fr;
-  }
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-  .contact-info-col, .contact-form-col {
+  .service-card {
     padding: 24px 20px;
+    border-radius: var(--radius-lg);
   }
-  .estimator-config, .estimator-summary {
-    padding: 24px 18px;
-  }
-  .feature-checkboxes {
+  .service-features {
     grid-template-columns: 1fr;
+    gap: 8px;
   }
-  
-  /* Comparison table mobile stack */
+
+  /* 6. Comparison Table (Mobile Stack) */
+  .comparison-table-wrapper {
+    border: none;
+    background: transparent;
+  }
+  .comparison-row.header-row {
+    display: none !important;
+  }
   .comparison-row {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    padding: 18px 16px;
+    align-items: stretch;
+    gap: 12px;
+    padding: 20px 16px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    background: #ffffff;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-xs);
   }
-  .comparison-row.header-row {
+  .col-feature {
+    font-weight: 800;
+    font-size: 1.02rem;
+    color: var(--brand-navy);
+  }
+  .col-feature .desc {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+    line-height: 1.45;
+  }
+  .col-traditional {
+    font-size: 0.84rem;
+    color: #dc2626;
+    background: #fef2f2;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #fee2e2;
+    width: 100%;
+  }
+  .col-traditional::before {
+    content: "Traditional Agency: ";
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    display: block;
+    margin-bottom: 2px;
+    color: #b91c1c;
+  }
+  .col-sukunix {
+    font-size: 0.86rem;
+    color: #15803d;
+    background: #f0fdf4;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #bbf7d0;
+    font-weight: 600;
+    width: 100%;
+  }
+  .col-sukunix::before {
+    content: "Sukunix Dedicated Pods: ";
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    display: block;
+    margin-bottom: 2px;
+    color: #166534;
+  }
+
+  /* 7. Scope Estimator */
+  .estimator-wrapper {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .estimator-config,
+  .estimator-summary {
+    padding: 24px 18px;
+    border-radius: var(--radius-lg);
+  }
+  .config-group {
+    margin-bottom: 24px;
+  }
+  .config-label {
+    font-size: 0.94rem;
+    margin-bottom: 12px;
+  }
+  .feature-checkboxes {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .checkbox-card {
+    padding: 12px 14px;
+    font-size: 0.85rem;
+  }
+  .price-total-display {
+    font-size: 2.1rem;
+  }
+  .estimator-summary .btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+  }
+
+  /* 8. Case Studies */
+  .filter-bar {
+    display: flex;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 4px 2px 14px 2px;
+    margin-bottom: 28px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .filter-bar::-webkit-scrollbar {
     display: none;
   }
-  .col-traditional, .col-sukunix {
-    font-size: 0.85rem;
-    padding: 4px 0;
+  .filter-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 8px 18px;
+    font-size: 0.82rem;
+    min-height: 40px;
   }
-  
+  .cases-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .case-card {
+    padding: 24px 18px;
+    border-radius: var(--radius-lg);
+  }
+  .case-metrics-grid {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 12px 6px;
+    gap: 6px;
+  }
+  .metric-val {
+    font-size: 1.12rem;
+  }
+  .metric-desc {
+    font-size: 0.68rem;
+  }
+  .case-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .case-link-btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+  }
+
+  /* 9. Tech Stack */
+  .tech-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .tech-column {
+    padding: 22px 18px;
+    border-radius: var(--radius-lg);
+  }
+  .tech-col-header {
+    margin-bottom: 16px;
+  }
+  .tech-col-header h3 {
+    font-size: 1.05rem;
+  }
+  .tech-item {
+    padding: 10px 12px;
+    font-size: 0.84rem;
+  }
+
+  /* 10. Process & Testimonials */
+  .process-steps {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .step-card {
+    padding: 24px 18px;
+    border-radius: var(--radius-lg);
+  }
+  .step-number {
+    font-size: 1.85rem;
+    margin-bottom: 8px;
+  }
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .testimonial-card {
+    padding: 24px 18px;
+    border-radius: var(--radius-lg);
+  }
+
+  /* 11. FAQ Section */
+  .faq-list {
+    gap: 12px;
+  }
+  .faq-question {
+    padding: 18px 16px;
+    font-size: 0.94rem;
+    gap: 12px;
+  }
+  .faq-answer {
+    padding: 0 16px 18px 16px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  /* 12. Contact Section */
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .contact-info-col,
+  .contact-form-col {
+    padding: 24px 18px;
+    border-radius: var(--radius-lg);
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .contact-form button[type="submit"] {
+    width: 100%;
+    min-height: 50px;
+    font-size: 0.95rem;
+    justify-content: center;
+  }
+  .contact-detail-item {
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .global-locations {
+    margin-top: 28px;
+    padding-top: 20px;
+  }
+  .loc-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .loc-pill {
+    font-size: 0.76rem;
+    padding: 6px 12px;
+  }
+
+  /* 13. Modals (Case Study & Booking) */
+  .modal-overlay {
+    padding: 12px 10px;
+  }
+  .modal-container {
+    width: 100%;
+    max-height: 92vh;
+    border-radius: var(--radius-lg);
+    padding: 20px 16px;
+  }
+  .booking-modal-overlay {
+    padding: 10px 8px;
+  }
+  .booking-modal-content {
+    width: 100%;
+    max-height: 92vh;
+    border-radius: var(--radius-lg);
+    margin: 0;
+  }
+  .booking-modal-header {
+    padding: 16px 16px;
+  }
+  .booking-header-title h3 {
+    font-size: 1.05rem;
+  }
+  .booking-stepper {
+    padding: 10px 14px;
+  }
+  .booking-step-indicator span:not(.step-num) {
+    display: none;
+  }
+  .booking-modal-body {
+    padding: 18px 14px;
+  }
+  .deductible-banner {
+    padding: 14px 12px;
+    gap: 10px;
+  }
+  .slot-dates-scroll {
+    gap: 8px;
+    padding-bottom: 10px;
+  }
+  .slot-date-btn {
+    flex: 0 0 68px;
+    padding: 10px 4px;
+  }
+  .slot-times-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .slot-selection-summary {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    text-align: center;
+  }
+  .slot-selection-summary .btn {
+    width: 100%;
+    min-height: 46px;
+    justify-content: center;
+  }
+  .zoom-grid-info {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  #conf-direct-join-btn,
+  #download-ics-btn,
+  #conf-wa-chat-btn {
+    width: 100%;
+    min-height: 46px;
+    justify-content: center;
+  }
+
+  /* 14. Footer */
+  .footer {
+    padding: 64px 0 28px 0;
+  }
+  .footer-watermark {
+    display: none !important;
+  }
   .footer-top {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 32px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .footer-legal-links {
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.82rem;
+  }
+  .footer-back-to-top {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+    margin-top: 8px;
   }
 }
+
+/* --- 640px Breakpoint (Mobile Landscape & Phablets) --- */
+@media (max-width: 640px) {
+  .config-options-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .option-btn {
+    padding: 12px 10px;
+    min-height: 52px;
+    justify-content: center;
+  }
+  .modal-metrics-banner {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 14px;
+  }
+}
+
+/* --- 480px Breakpoint (Standard Mobile Phones) --- */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 14px;
+  }
+  .brand-logo-img {
+    height: 26px;
+    max-width: 125px;
+  }
+  .hero-title {
+    font-size: clamp(1.85rem, 7.8vw, 2.2rem);
+  }
+  .hero-stats-banner {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 18px 14px;
+  }
+  .stat-item {
+    text-align: center;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+    padding-bottom: 12px;
+  }
+  .stat-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .stat-number {
+    font-size: 1.6rem;
+  }
+
+  /* CLI prompt compact on small phones */
+  .cli-input-row .cli-user,
+  .cli-input-row .cli-at,
+  .cli-input-row .cli-host,
+  .cli-input-row .cli-colon,
+  .cli-input-row .cli-path {
+    display: none !important;
+  }
+  .cli-input-row .cli-dollar {
+    margin-right: 4px;
+    font-weight: bold;
+    color: #4ade80;
+  }
+
+  /* Case study metrics single stack on tiny screens */
+  .case-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 12px;
+  }
+  .metric-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    padding: 6px 8px;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+  }
+  .metric-box:last-child {
+    border-bottom: none;
+  }
+  .metric-val {
+    font-size: 1.15rem;
+    order: 2;
+    margin-bottom: 0;
+  }
+  .metric-desc {
+    order: 1;
+    font-size: 0.78rem;
+  }
+
+  /* Booking modal slot date buttons */
+  .slot-dates-scroll {
+    gap: 6px;
+  }
+  .slot-date-btn {
+    flex: 0 0 64px;
+    padding: 10px 2px;
+  }
+  .slot-day-num {
+    font-size: 1.15rem;
+  }
+  .slot-times-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+/* --- 360px Breakpoint (Compact Screen e.g. iPhone SE / Galaxy A) --- */
+@media (max-width: 360px) {
+  .container {
+    padding: 0 12px;
+  }
+  .config-options-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-title {
+    font-size: 1.75rem;
+  }
+  .slot-selection-summary {
+    padding: 12px 10px;
+    font-size: 0.8rem;
+  }
+}
+
 
 /* ==========================================================================
    21. Paid Discovery Consultation Booking System Styles
@@ -3549,54 +4136,4 @@ h1, h2, h3, h4, h5, h6 {
   to { transform: rotate(360deg); }
 }
 
-/* Responsive Overrides */
-@media (max-width: 768px) {
-  .booking-modal-header {
-    padding: 18px 20px;
-  }
-  .booking-stepper {
-    padding: 12px 18px;
-  }
-  .booking-step-indicator span:not(.step-num) {
-    display: none;
-  }
-  .booking-modal-body {
-    padding: 20px;
-  }
-  .slot-times-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .booking-form-grid {
-    grid-template-columns: 1fr;
-  }
-  .payment-methods-grid {
-    grid-template-columns: 1fr;
-  }
-  .zoom-grid-info {
-    grid-template-columns: 1fr;
-  }
-  .brand-logo-img {
-    height: 32px;
-  }
-  .footer-top {
-    grid-template-columns: 1fr;
-    gap: 36px;
-  }
-  .footer-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
-  }
-  .footer-legal-links {
-    flex-wrap: wrap;
-    gap: 14px;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .footer-top {
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-  }
-}
 
