@@ -371,7 +371,47 @@
       timestamp: new Date().toISOString()
     };
 
-    // Dispatch Webhook to Make.com / n8n / Zapier / WhatsApp Cloud API if configured
+    // Save to Backend API (MongoDB) & trigger email confirmations
+    try {
+      fetch('/api/book-consultation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          bookingRef: bookingState.meetingDetails.bookingRef,
+          client: bookingState.client,
+          slot: {
+            date: bookingState.selectedDate.iso,
+            dateFormatted: bookingState.selectedDate.formatted,
+            time: bookingState.selectedTime,
+            timezone: bookingState.timezone
+          },
+          meeting: {
+            meetingId,
+            passcode,
+            zoomLink
+          },
+          deposit: {
+            currency: bookingState.currency || 'INR',
+            amount: bookingState.depositAmount || 499
+          }
+        })
+      })
+      .then(r => r.json())
+      .then(data => {
+        console.log('[Sukunix Backend API] Booking recorded:', data);
+        if (data.whatsapp && data.whatsapp.directCompanyWhatsAppUrl) {
+          const waChatBtn = document.getElementById('conf-wa-chat-btn');
+          if (waChatBtn) {
+            waChatBtn.href = data.whatsapp.directCompanyWhatsAppUrl;
+          }
+        }
+      })
+      .catch(err => console.warn('[Sukunix Backend API] Notice:', err));
+    } catch (e) {
+      console.warn('[Sukunix Booking Engine] API dispatch error:', e);
+    }
+
+    // Dispatch Webhook to Make.com / n8n / Zapier if configured
     dispatchBookingWebhook(bookingState.meetingDetails);
 
     // Render Confirmation Step 3
@@ -379,7 +419,7 @@
     goToStep(3);
 
     if (window.showToast) {
-      window.showToast('Consultation locked! Zoom meeting credentials generated.', 'success');
+      window.showToast('Consultation locked! Zoom credentials generated & emailed.', 'success');
     }
 
     if (submitBtn) {
@@ -425,9 +465,10 @@
 
     const waChatBtn = document.getElementById('conf-wa-chat-btn');
     if (waChatBtn) {
-      const cleanPhone = details.client.whatsapp.replace(/[^0-9]/g, '');
+      // Connect directly to Sukunix Company WhatsApp: +91 8866279140
+      const companyWhatsApp = '918866279140';
       const msg = `Hello Sukunix Team, I have booked an Architecture Discovery Session!\n\nReference: ${details.bookingRef}\nSlot: ${details.dateFormatted} at ${details.time} (${details.timezone})\nZoom: ${details.zoomLink}\nAttendee: ${details.client.name} (${details.client.company})\nFocus: ${details.client.service}\n\nLooking forward to the consultation.`;
-      waChatBtn.href = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`;
+      waChatBtn.href = `https://wa.me/${companyWhatsApp}?text=${encodeURIComponent(msg)}`;
     }
   }
 

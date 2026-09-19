@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sukunix_web
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongo:27017/sukunix
+      - COMPANY_EMAIL=infosukunix@gmail.com
+      - COMPANY_PHONE=+91 8866279140
+      - COMPANY_WHATSAPP=918866279140
+      - WEBSITE_URL=https://sukunix.com
+      - EMAIL_HOST=smtp.gmail.com
+      - EMAIL_PORT=587
+      - EMAIL_USER=infosukunix@gmail.com
+      - EMAIL_PASS=${EMAIL_PASS:-}
+    depends_on:
+      - mongo
+    volumes:
+      - sukunix_data:/app/data
+
+  mongo:
+    image: mongo:7.0-jammy
+    container_name: sukunix_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  sukunix_data:
+  mongo_data:

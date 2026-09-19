@@ -1,0 +1,29 @@
+{
+  "name": "sukunix-web",
+  "version": "1.0.0",
+  "description": "Enterprise Software Engineering & Cloud Solutions - Sukunix.com",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node -e \"console.log('Testing health...'); fetch('http://localhost:3000/api/health').then(r=>r.json()).then(console.log);\""
+  },
+  "keywords": [
+    "sukunix",
+    "software-engineering",
+    "cloud-infrastructure",
+    "aws",
+    "express"
+  ],
+  "author": "Sukunix Technologies",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.3.1",
+    "helmet": "^7.1.0",
+    "mongoose": "^9.10.1",
+    "nodemailer": "^6.9.14"
+  }
+}

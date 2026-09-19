@@ -330,28 +330,71 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
     const form = document.getElementById('consultation-form');
     if (!form) return;
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const nameInput = document.getElementById('client-name');
       const emailInput = document.getElementById('client-email');
+      const serviceInput = document.getElementById('project-service');
+      const budgetInput = document.getElementById('project-budget');
+      const messageInput = document.getElementById('project-message');
       const submitBtn = form.querySelector('button[type="submit"]');
 
-      if (!nameInput.value.trim() || !emailInput.value.trim()) {
-        window.showToast('Please provide your name and work email.', 'error');
+      const name = nameInput ? nameInput.value.trim() : '';
+      const email = emailInput ? emailInput.value.trim() : '';
+
+      if (!name || !email) {
+        if (window.showToast) window.showToast('Please provide your name and work email.', 'error');
         return;
       }
 
-      const originalText = submitBtn.innerHTML;
+      const originalHtml = submitBtn.innerHTML;
       submitBtn.disabled = true;
-      submitBtn.innerHTML = `<span>Submitting Inquiry...</span>`;
+      submitBtn.innerHTML = `
+        <span style="display:inline-flex; align-items:center; gap:8px;">
+          <svg class="spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation: spin 0.8s linear infinite;">
+            <circle cx="12" cy="12" r="10" stroke-dasharray="32" stroke-dashoffset="12"></circle>
+          </svg>
+          <span>Dispatching to Engineering Pod...</span>
+        </span>
+      `;
 
-      setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
-        window.showToast('Thank you. Your inquiry has been received. An engineering director will contact you within one business day.', 'success');
+      try {
+        const payload = {
+          name,
+          email,
+          service: serviceInput ? serviceInput.options[serviceInput.selectedIndex].text : 'Enterprise Software Development',
+          budget: budgetInput ? budgetInput.options[budgetInput.selectedIndex].text : '$25,000 – $75,000',
+          message: messageInput ? messageInput.value.trim() : ''
+        };
+
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          if (window.showToast) {
+            window.showToast('Inquiry received! Our engineering team will review and contact you within one business day.', 'success');
+          }
+          form.reset();
+        } else {
+          const errMsg = data.error || 'Unable to dispatch inquiry. Please try again or email infosukunix@gmail.com';
+          if (window.showToast) window.showToast(errMsg, 'error');
+        }
+      } catch (networkErr) {
+        console.warn('[Contact Form] Network fetch fallback:', networkErr);
+        if (window.showToast) {
+          window.showToast('Inquiry noted. If urgent, please WhatsApp us at +91 8866279140 or email infosukunix@gmail.com', 'info');
+        }
         form.reset();
-      }, 900);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHtml;
+      }
     });
   }
 
