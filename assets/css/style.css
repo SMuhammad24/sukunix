@@ -477,7 +477,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 100%;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.85;
+  opacity: 0.95;
 }
 
 /* Interactive 3D Perspective Card Tilt Physics */
@@ -486,8 +486,48 @@ h1, h2, h3, h4, h5, h6 {
 .tech-column,
 .hero-sandbox {
   transform-style: preserve-3d;
+  perspective: 1000px;
   will-change: transform;
-  transition: transform 0.16s ease-out, box-shadow 0.25s ease;
+  transition: transform 0.18s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s ease;
+}
+
+/* 3D Multi-Layer Physical Depth Pop-out */
+.service-card .service-icon-box {
+  transform: translateZ(28px);
+  transition: transform 0.28s cubic-bezier(0.2, 0, 0, 1), background 0.3s ease;
+}
+
+.service-card .service-title {
+  transform: translateZ(22px);
+}
+
+.service-card .service-desc {
+  transform: translateZ(14px);
+}
+
+.service-card .service-tags {
+  transform: translateZ(24px);
+}
+
+.service-card .tag-pill {
+  display: inline-block;
+  transform: translateZ(8px);
+}
+
+.case-card .case-content {
+  transform: translateZ(22px);
+}
+
+.case-card .case-tags {
+  transform: translateZ(18px);
+}
+
+.hero-sandbox .sandbox-header {
+  transform: translateZ(20px);
+}
+
+.hero-sandbox .sandbox-content {
+  transform: translateZ(14px);
 }
 
 .hero-content {

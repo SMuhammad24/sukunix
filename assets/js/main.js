@@ -631,6 +631,9 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
   // 11. Interactive 3D Cyber Particle Mesh / Tech Globe Canvas
   // -------------------------------------------------------------------------
   function init3DHeroCanvas() {
+    // If Three.js WebGL engine is loaded, defer to hero-3d.js
+    if (window.THREE) return;
+
     const canvas = document.getElementById('hero-3d-canvas');
     if (!canvas) return;
 
@@ -822,6 +825,7 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
 
     tiltCards.forEach((card) => {
       let isHovered = false;
+      let rafId = null;
 
       card.addEventListener('mouseenter', () => {
         isHovered = true;
@@ -839,15 +843,19 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
         const deltaX = (cardX - centerX) / centerX;
         const deltaY = (cardY - centerY) / centerY;
 
-        const maxTilt = card.classList.contains('hero-sandbox') ? 3.5 : 6.5;
+        const maxTilt = card.classList.contains('hero-sandbox') ? 3.5 : 7.0;
         const rotX = -deltaY * maxTilt;
         const rotY = deltaX * maxTilt;
 
-        card.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateY(-4px) scale3d(1.012, 1.012, 1.012)`;
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => {
+          card.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateY(-6px) scale3d(1.015, 1.015, 1.015)`;
+        });
       });
 
       card.addEventListener('mouseleave', () => {
         isHovered = false;
+        if (rafId) cancelAnimationFrame(rafId);
         card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)';
       });
     });
