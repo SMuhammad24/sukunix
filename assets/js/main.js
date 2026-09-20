@@ -941,7 +941,68 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
   }
 
   // -------------------------------------------------------------------------
-  // 14. Initialize on DOM Ready
+  // 14. 3D Package Flip Card Reveal Mechanism
+  // -------------------------------------------------------------------------
+  function initPackageFlipCards() {
+    const flipCards = document.querySelectorAll('.pkg-flip-card');
+    if (!flipCards.length) return;
+
+    flipCards.forEach((card) => {
+      const frontFace = card.querySelector('.pkg-face-front');
+      const backFace = card.querySelector('.pkg-face-back');
+      const revealBtn = card.querySelector('.btn-reveal-trigger');
+      const flipBackBtn = card.querySelector('.pkg-flip-back-btn');
+
+      // Click on front face or reveal button opens the card
+      const openCard = (e) => {
+        e.stopPropagation();
+        card.classList.add('is-flipped');
+      };
+
+      // Click on flip-back button closes the card
+      const closeCard = (e) => {
+        e.stopPropagation();
+        card.classList.remove('is-flipped');
+      };
+
+      frontFace?.addEventListener('click', openCard);
+      revealBtn?.addEventListener('click', openCard);
+      flipBackBtn?.addEventListener('click', closeCard);
+
+      // Prevent clicks on action buttons inside back face from triggering unintentional flip
+      if (backFace) {
+        const interactiveElements = backFace.querySelectorAll('button:not(.pkg-flip-back-btn), a, input, select');
+        interactiveElements.forEach((el) => {
+          el.addEventListener('click', (e) => {
+            e.stopPropagation();
+          });
+        });
+      }
+    });
+
+    // Toggle all button if present on page
+    const toggleAllBtn = document.getElementById('toggle-all-plans-btn');
+    const toggleText = document.getElementById('toggle-plans-text');
+    if (toggleAllBtn) {
+      let allFlipped = false;
+      toggleAllBtn.addEventListener('click', () => {
+        allFlipped = !allFlipped;
+        flipCards.forEach((card) => {
+          if (allFlipped) {
+            card.classList.add('is-flipped');
+          } else {
+            card.classList.remove('is-flipped');
+          }
+        });
+        if (toggleText) {
+          toggleText.textContent = allFlipped ? 'Show Plan Covers' : 'Reveal All Plans';
+        }
+      });
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // 15. Initialize on DOM Ready
   // -------------------------------------------------------------------------
   document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
@@ -956,5 +1017,7 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
     initFaqAccordion();
     initContactForm();
     initFooterInteractions();
+    initPackageFlipCards();
   });
 })();
+
