@@ -65,6 +65,10 @@ app.use(cors({ origin: config.corsOrigin }));
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 
+// Global XSS Sanitization Middleware (Strips malicious scripts from body, query & params)
+const { xssSanitizer } = require('./src/middleware/xssSanitizer');
+app.use(xssSanitizer);
+
 // Rate Limiter for API protection on AWS
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -78,7 +82,23 @@ const apiLimiter = rateLimit({
 });
 app.use('/api/', apiLimiter);
 
+const adminRoutes = require('./src/routes/admin');
+
+// Brute-force protection for Admin Login
+const adminAuthLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 15, // Max 15 attempts per 15 minutes per IP
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    success: false,
+    error: 'Too many administrative login attempts. Please wait 15 minutes before trying again.'
+  }
+});
+app.use('/api/admin/login', adminAuthLimiter);
+
 // Mount API routes
+app.use('/api/admin', adminRoutes);
 app.use('/api', apiRoutes);
 
 // Serve static frontend files (assets, favicons, site.webmanifest)
@@ -97,6 +117,11 @@ app.get('/case-studies', (req, res) => {
 
 app.get('/calculator', (req, res) => {
   res.sendFile(path.join(__dirname, 'calculator.html'));
+});
+
+// Admin Panel Executive Dashboard
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'admin.html'));
 });
 
 // Fallback 404 handler for unmatched /api routes

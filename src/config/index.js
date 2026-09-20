@@ -41,5 +41,13 @@ module.exports = {
   },
 
   // Security / CORS
-  corsOrigin: process.env.CORS_ORIGIN || '*'
+  corsOrigin: process.env.CORS_ORIGIN || '*',
+
+  // Admin Panel Security
+  admin: {
+    email: process.env.ADMIN_EMAIL || 'infosukunix@gmail.com',
+    password: process.env.ADMIN_PASSWORD || 'sukunix@2026',
+    jwtSecret: process.env.JWT_SECRET || 'sukunix_secret_super_secure_jwt_key_2026',
+    jwtExpiresIn: '7d'
+  }
 };
