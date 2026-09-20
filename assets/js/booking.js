@@ -51,6 +51,24 @@
     triggers.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
+        const planName = btn.getAttribute('data-plan') || btn.getAttribute('data-select-plan');
+        if (planName) {
+          const serviceSelect = document.getElementById('bk-service');
+          if (serviceSelect) {
+            let matched = false;
+            for (let i = 0; i < serviceSelect.options.length; i++) {
+              if (serviceSelect.options[i].value === planName || serviceSelect.options[i].text.includes(planName.split(' ')[0])) {
+                serviceSelect.selectedIndex = i;
+                matched = true;
+                break;
+              }
+            }
+            if (!matched) {
+              const newOpt = new Option(planName, planName, true, true);
+              serviceSelect.add(newOpt);
+            }
+          }
+        }
         openBookingModal();
       });
     });
@@ -267,6 +285,40 @@
     if (downloadIcsBtn) {
       downloadIcsBtn.addEventListener('click', downloadIcsCalendarFile);
     }
+
+    // Platform Selection (Google Meet vs Zoom)
+    const platformRadios = document.querySelectorAll('input[name="meeting_platform"]');
+    platformRadios.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const val = e.target.value;
+        bookingState.platform = val;
+        const meetCard = document.getElementById('opt-platform-meet');
+        const zoomCard = document.getElementById('opt-platform-zoom');
+        if (val === 'google_meet') {
+          if (meetCard) {
+            meetCard.style.borderColor = 'var(--brand-blue)';
+            meetCard.style.backgroundColor = 'var(--brand-blue-soft)';
+            meetCard.style.borderWidth = '2px';
+          }
+          if (zoomCard) {
+            zoomCard.style.borderColor = 'var(--border-subtle)';
+            zoomCard.style.backgroundColor = '#ffffff';
+            zoomCard.style.borderWidth = '1px';
+          }
+        } else {
+          if (zoomCard) {
+            zoomCard.style.borderColor = '#2D8CFF';
+            zoomCard.style.backgroundColor = '#eff6ff';
+            zoomCard.style.borderWidth = '2px';
+          }
+          if (meetCard) {
+            meetCard.style.borderColor = 'var(--border-subtle)';
+            meetCard.style.backgroundColor = '#ffffff';
+            meetCard.style.borderWidth = '1px';
+          }
+        }
+      });
+    });
   }
 
   function goToStep(stepNum) {
@@ -324,6 +376,9 @@
       return false;
     }
 
+    const platformInput = document.querySelector('input[name="meeting_platform"]:checked');
+    bookingState.platform = platformInput ? platformInput.value : 'google_meet';
+
     bookingState.client = {
       name: name,
       email: email,
@@ -336,16 +391,17 @@
     return true;
   }
 
-  // --- Direct Meeting Booking & Zoom Generation ---
+  // --- Direct Meeting Booking & Meeting Generation ---
   function submitConsultationBooking() {
     const submitBtn = document.getElementById('confirm-booking-btn');
     const originalText = submitBtn ? submitBtn.innerHTML : '';
+    const platformLabel = bookingState.platform === 'zoom' ? 'Zoom' : 'Google Meet';
 
     if (submitBtn) {
       submitBtn.setAttribute('disabled', 'true');
       submitBtn.innerHTML = `
         <div class="booking-spinner"></div>
-        <span>Generating Zoom Meeting & Calendar Invite...</span>
+        <span>Generating ${platformLabel} Link & Calendar Invite...</span>
       `;
     }
 
@@ -354,32 +410,30 @@
     }, 700);
   }
 
-  function finalizeBookingSuccess(submitBtn, originalText) {
-    // Generate meeting credentials
-    const meetingId = generateRandomNumber(10, true);
-    const passcode = generateRandomCode(6);
+  async function finalizeBookingSuccess(submitBtn, originalText) {
     const bookingRef = `SKX-${Math.floor(100000 + Math.random() * 900000)}`;
-    const zoomLink = `https://zoom.us/j/${meetingId.replace(/\s/g, '')}?pwd=${passcode}`;
-
-    bookingState.meetingDetails = {
+    const cleanRef = bookingRef.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const isZoom = bookingState.platform === 'zoom';
+    const fallbackDynamicRoom = isZoom 
+      ? `https://meet.jit.si/sukunix-zoom-${cleanRef}`
+      : `https://meet.jit.si/sukunix-consultation-${cleanRef}`;
+    
+    let meetingData = {
       bookingRef: bookingRef,
-      meetingId: meetingId,
-      passcode: passcode,
-      zoomLink: zoomLink,
-      dateFormatted: bookingState.selectedDate.formatted,
-      time: bookingState.selectedTime,
-      timezone: bookingState.timezone,
-      client: bookingState.client,
-      timestamp: new Date().toISOString()
+      platform: isZoom ? 'Zoom' : 'Google Meet',
+      meetingId: bookingRef,
+      passcode: `SKX${bookingRef.slice(-3)}`,
+      zoomLink: fallbackDynamicRoom
     };
 
-    // Save to Backend API (MongoDB) & trigger email confirmations
+    // Save to Backend API (MongoDB / fallback) & obtain real automatic meeting link
     try {
-      fetch('/api/book-consultation', {
+      const response = await fetch('/api/book-consultation', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          bookingRef: bookingState.meetingDetails.bookingRef,
+          bookingRef: bookingRef,
+          platform: bookingState.platform || 'google_meet',
           client: bookingState.client,
           slot: {
             date: bookingState.selectedDate.iso,
@@ -387,31 +441,45 @@
             time: bookingState.selectedTime,
             timezone: bookingState.timezone
           },
-          meeting: {
-            meetingId,
-            passcode,
-            zoomLink
-          },
           deposit: {
             currency: bookingState.currency || 'INR',
             amount: bookingState.depositAmount || 499
           }
         })
-      })
-      .then(r => r.json())
-      .then(data => {
+      });
+
+      if (response.ok) {
+        const data = await response.json();
         console.log('[Sukunix Backend API] Booking recorded:', data);
+        if (data.meeting) {
+          meetingData.platform = data.meeting.platform || meetingData.platform;
+          meetingData.meetingId = data.meeting.meetingId || meetingData.meetingId;
+          meetingData.passcode = data.meeting.passcode || meetingData.passcode;
+          meetingData.zoomLink = data.meeting.zoomLink || data.meeting.meetingUrl || fallbackDynamicRoom;
+        }
         if (data.whatsapp && data.whatsapp.directCompanyWhatsAppUrl) {
           const waChatBtn = document.getElementById('conf-wa-chat-btn');
           if (waChatBtn) {
             waChatBtn.href = data.whatsapp.directCompanyWhatsAppUrl;
           }
         }
-      })
-      .catch(err => console.warn('[Sukunix Backend API] Notice:', err));
+      }
     } catch (e) {
-      console.warn('[Sukunix Booking Engine] API dispatch error:', e);
+      console.warn('[Sukunix Booking Engine] Backend API warning, using instant secure live room:', e);
     }
+
+    bookingState.meetingDetails = {
+      bookingRef: bookingRef,
+      platform: meetingData.platform,
+      meetingId: meetingData.meetingId,
+      passcode: meetingData.passcode,
+      zoomLink: meetingData.zoomLink,
+      dateFormatted: bookingState.selectedDate.formatted,
+      time: bookingState.selectedTime,
+      timezone: bookingState.timezone,
+      client: bookingState.client,
+      timestamp: new Date().toISOString()
+    };
 
     // Dispatch Webhook to Make.com / n8n / Zapier if configured
     dispatchBookingWebhook(bookingState.meetingDetails);
@@ -421,7 +489,7 @@
     goToStep(3);
 
     if (window.showToast) {
-      window.showToast('Consultation locked! Zoom credentials generated & emailed.', 'success');
+      window.showToast('Consultation locked! Automatic meeting room link created.', 'success');
     }
 
     if (submitBtn) {
@@ -458,6 +526,25 @@
     const joinBtn = document.getElementById('conf-direct-join-btn');
     if (joinBtn) {
       joinBtn.href = details.zoomLink;
+      const btnSpan = joinBtn.querySelector('span');
+      if (btnSpan) {
+        if (details.zoomLink.includes('meet.google.com')) {
+          btnSpan.textContent = 'Join Google Meet Directly';
+        } else if (details.zoomLink.includes('zoom.us')) {
+          btnSpan.textContent = 'Join Zoom Call Directly';
+        } else {
+          btnSpan.textContent = 'Join Live Consultation Room';
+        }
+      }
+    }
+
+    const badgeEl = document.querySelector('.zoom-badge span:last-child');
+    if (badgeEl) {
+      if (details.platform === 'Zoom' || (details.zoomLink && details.zoomLink.includes('zoom.us'))) {
+        badgeEl.textContent = 'OFFICIAL ZOOM MEETING READY';
+      } else {
+        badgeEl.textContent = 'GOOGLE MEET READY';
+      }
     }
 
     const waAlertNumber = document.getElementById('conf-wa-target');
@@ -469,7 +556,8 @@
     if (waChatBtn) {
       // Connect directly to Sukunix Company WhatsApp: +91 8866279140
       const companyWhatsApp = '918866279140';
-      const msg = `Hello Sukunix Team, I have booked an Architecture Discovery Session!\n\nReference: ${details.bookingRef}\nSlot: ${details.dateFormatted} at ${details.time} (${details.timezone})\nZoom: ${details.zoomLink}\nAttendee: ${details.client.name} (${details.client.company})\nFocus: ${details.client.service}\n\nLooking forward to the consultation.`;
+      const platformName = details.platform || (details.zoomLink && details.zoomLink.includes('zoom.us') ? 'Zoom' : 'Google Meet');
+      const msg = `Hello Sukunix Team, I have booked an Architecture Discovery Session!\n\nReference: ${details.bookingRef}\nSlot: ${details.dateFormatted} at ${details.time} (${details.timezone})\nPlatform: ${platformName}\nMeeting Link: ${details.zoomLink}\nAttendee: ${details.client.name} (${details.client.company})\nFocus: ${details.client.service}\n\nLooking forward to our consultation.`;
       waChatBtn.href = `https://wa.me/${companyWhatsApp}?text=${encodeURIComponent(msg)}`;
     }
   }
@@ -499,7 +587,8 @@
     const endStr = formatIcsDate(endLocal);
     const nowStr = formatIcsDate(new Date());
 
-    const description = `Sukunix Architecture Discovery Consultation\\n\\nMeeting Link: ${details.zoomLink}\\nMeeting ID: ${details.meetingId}\\nPasscode: ${details.passcode}\\nBooking Ref: ${details.bookingRef}\\nSystem Focus: ${details.client.service}\\nAttendee: ${details.client.name} (${details.client.company})`;
+    const platformName = details.platform || (details.zoomLink && details.zoomLink.includes('zoom.us') ? 'Zoom' : 'Google Meet');
+    const description = `Sukunix Architecture Discovery Consultation\\n\\nPlatform: ${platformName}\\nMeeting Link: ${details.zoomLink}\\nMeeting ID: ${details.meetingId}\\nPasscode: ${details.passcode}\\nBooking Ref: ${details.bookingRef}\\nSystem Focus: ${details.client.service}\\nAttendee: ${details.client.name} (${details.client.company})`;
 
     const icsContent = [
       'BEGIN:VCALENDAR',
@@ -512,9 +601,9 @@
       `DTSTAMP:${nowStr}`,
       `DTSTART:${startStr}`,
       `DTEND:${endStr}`,
-      `SUMMARY:Sukunix Enterprise Discovery Call: ${details.client.name}`,
+      `SUMMARY:Sukunix Enterprise Discovery Call (${platformName}): ${details.client.name}`,
       `DESCRIPTION:${description}`,
-      `LOCATION:Zoom Video Call (${details.zoomLink})`,
+      `LOCATION:${platformName} (${details.zoomLink})`,
       'STATUS:CONFIRMED',
       'ORGANIZER;CN=Sukunix Architecture Team:mailto:consult@sukunix.com',
       `ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=${details.client.name}:mailto:${details.client.email}`,

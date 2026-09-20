@@ -5,14 +5,15 @@ const config = require('../config');
  */
 function formatClientMessage(booking) {
   const { client, slot, meeting, bookingRef } = booking;
+  const meetingUrl = meeting.zoomLink || meeting.meetingUrl || 'https://sukunix.com';
+  const platformName = meeting.platform || (meetingUrl.includes('zoom.us') ? 'Zoom' : 'Google Meet');
   return `Hello ${client.name},
 
 Your Paid Discovery Architecture Consultation with Sukunix Technologies is confirmed!
 
 📅 Date & Time: ${slot.dateFormatted} at ${slot.time} (${slot.timezone})
-🔗 Zoom Meeting Link: ${meeting.zoomLink}
-🆔 Meeting ID: ${meeting.meetingId}
-🔑 Passcode: ${meeting.passcode}
+📹 Platform: ${platformName}
+🔗 Meeting Link: ${meetingUrl}
 📋 Booking Ref: ${bookingRef}
 
 Our senior engineering architect looks forward to our session. A calendar invite has also been dispatched to ${client.email}.
@@ -27,15 +28,17 @@ https://sukunix.com`;
  */
 function formatCompanyAlertMessage(booking) {
   const { client, slot, meeting, bookingRef } = booking;
+  const meetingUrl = meeting.zoomLink || meeting.meetingUrl || 'https://sukunix.com';
+  const platformName = meeting.platform || (meetingUrl.includes('zoom.us') ? 'Zoom' : 'Google Meet');
   return `🚨 NEW SUKUNIX CONSULTATION BOOKING!
 
 • Client: ${client.name} (${client.company || 'Undisclosed'})
 • WhatsApp: ${client.whatsapp}
 • Email: ${client.email}
 • Slot: ${slot.dateFormatted} at ${slot.time} (${slot.timezone})
+• Platform: ${platformName}
+• Meeting Link: ${meetingUrl}
 • Focus: ${client.service}
-• Zoom Link: ${meeting.zoomLink}
-• Meeting ID: ${meeting.meetingId}
 • Ref: ${bookingRef}`;
 }
 

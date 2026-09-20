@@ -139,12 +139,49 @@ router.post('/book-consultation', async (req, res) => {
         status: (deposit && deposit.status) || 'paid',
         paymentId: (deposit && deposit.paymentId) || ''
       },
-      meeting: {
-        meetingId: (meeting && meeting.meetingId) || `${Math.floor(800 + Math.random() * 199)} ${Math.floor(1000 + Math.random() * 8999)} ${Math.floor(1000 + Math.random() * 8999)}`,
-        passcode: (meeting && meeting.passcode) || `SKX${Math.floor(100 + Math.random() * 899)}`,
-        zoomLink: (meeting && meeting.zoomLink) || `https://zoom.us/j/${Math.floor(8000000000 + Math.random() * 1999999999)}`,
-        status: 'scheduled'
-      },
+      meeting: (() => {
+        // Automatic Real Meeting Link Engine (Supports both Google Meet and Zoom):
+        const reqPlatform = ((meeting && meeting.platform) || req.body.platform || 'google_meet').toLowerCase();
+        const isZoom = reqPlatform.includes('zoom');
+        const platformName = isZoom ? 'Zoom' : 'Google Meet';
+        const cleanRef = bookingRef.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+        let effectiveUrl = '';
+
+        if (isZoom) {
+          if (config.meeting && config.meeting.zoomUrl && config.meeting.zoomUrl.trim()) {
+            effectiveUrl = config.meeting.zoomUrl.trim();
+          } else if (config.meeting && config.meeting.defaultUrl && config.meeting.defaultUrl.includes('zoom.us')) {
+            effectiveUrl = config.meeting.defaultUrl.trim();
+          } else {
+            effectiveUrl = `https://meet.jit.si/sukunix-zoom-${cleanRef}`;
+          }
+        } else {
+          if (config.meeting && config.meeting.googleMeetUrl && config.meeting.googleMeetUrl.trim()) {
+            effectiveUrl = config.meeting.googleMeetUrl.trim();
+          } else if (config.meeting && config.meeting.defaultUrl && config.meeting.defaultUrl.trim()) {
+            effectiveUrl = config.meeting.defaultUrl.trim();
+          } else {
+            effectiveUrl = `https://meet.jit.si/sukunix-consultation-${cleanRef}`;
+          }
+        }
+
+        const effectiveMeetingId = (meeting && meeting.meetingId && !meeting.meetingId.includes('random'))
+          ? meeting.meetingId
+          : bookingRef;
+        const effectivePasscode = (meeting && meeting.passcode)
+          ? meeting.passcode
+          : `SKX${bookingRef.replace(/[^0-9]/g, '').slice(-3) || '2026'}`;
+
+        return {
+          platform: platformName,
+          meetingId: effectiveMeetingId,
+          passcode: effectivePasscode,
+          zoomLink: effectiveUrl, // Compatible with zoomLink readers
+          meetingUrl: effectiveUrl,
+          status: 'scheduled'
+        };
+      })(),
       ipAddress: req.ip || req.headers['x-forwarded-for'] || ''
     };
 

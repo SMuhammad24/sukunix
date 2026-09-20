@@ -149,9 +149,8 @@ async function sendBookingConfirmation(booking) {
           <tr><td style="padding: 6px 0; color: #64748b;">Work Email:</td><td><a href="mailto:${client.email}">${client.email}</a></td></tr>
           <tr><td style="padding: 6px 0; color: #64748b;">WhatsApp:</td><td><a href="https://wa.me/${client.whatsapp.replace(/[^0-9]/g, '')}">${client.whatsapp}</a></td></tr>
           <tr><td style="padding: 6px 0; color: #64748b;">Slot:</td><td><strong>${slot.dateFormatted} at ${slot.time} (${slot.timezone})</strong></td></tr>
-          <tr><td style="padding: 6px 0; color: #64748b;">Architecture Focus:</td><td>${client.service}</td></tr>
-          <tr><td style="padding: 6px 0; color: #64748b;">Zoom Link:</td><td><a href="${meeting.zoomLink}" style="color: #2563eb;">${meeting.zoomLink}</a></td></tr>
-          <tr><td style="padding: 6px 0; color: #64748b;">Meeting ID:</td><td><code>${meeting.meetingId}</code> | Passcode: <code>${meeting.passcode}</code></td></tr>
+          <tr><td style="padding: 6px 0; color: #64748b;">Platform:</td><td><strong>${meeting.platform || (meeting.zoomLink && meeting.zoomLink.includes('zoom.us') ? 'Zoom Video' : 'Google Meet')}</strong></td></tr>
+          <tr><td style="padding: 6px 0; color: #64748b;">Video Meeting:</td><td><a href="${meeting.zoomLink || meeting.meetingUrl}" style="display: inline-block; background: #2563eb; color: #ffffff; padding: 6px 14px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 13px;">Join Video Meeting Room &rarr;</a><br><span style="font-size: 11px; color: #64748b;">${meeting.zoomLink || meeting.meetingUrl}</span></td></tr>
         </table>
       </div>
     </div>

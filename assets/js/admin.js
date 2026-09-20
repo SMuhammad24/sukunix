@@ -402,13 +402,16 @@
           <td>
             ${zoomLink ? `
               <div class="cell-primary">
-                <a href="${safeZoomLink}" target="_blank" rel="noopener noreferrer" class="text-blue" style="text-decoration:none; font-weight:600;">
-                  Join Zoom ↗
+                <a href="${safeZoomLink}" target="_blank" rel="noopener noreferrer" class="text-blue" style="text-decoration:none; font-weight:700;">
+                  Join Meeting ↗
                 </a>
               </div>
-              <div class="cell-sub cell-mono">ID: ${escapeHtml(meetingId)}</div>
-              <div class="cell-sub cell-mono">Pass: ${escapeHtml(passcode)}</div>
-            ` : '<span class="cell-sub">No Zoom Link</span>'}
+              <div class="cell-sub" style="font-size: 11px;">
+                <span class="status-pill status-scheduled" style="padding: 1px 6px; font-size: 10px;">
+                  ${safeZoomLink.includes('meet.google.com') ? 'Google Meet' : (safeZoomLink.includes('zoom.us') ? 'Zoom' : 'Live Room')}
+                </span>
+              </div>
+            ` : '<span class="cell-sub">No Link</span>'}
           </td>
           <td>
             <select class="status-dropdown" onchange="window.adminChangeBookingStatus('${bookingId}', this.value)">

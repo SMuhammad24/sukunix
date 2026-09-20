@@ -49,5 +49,12 @@ module.exports = {
     password: process.env.ADMIN_PASSWORD || 'sukunix@2026',
     jwtSecret: process.env.JWT_SECRET || 'sukunix_secret_super_secure_jwt_key_2026',
     jwtExpiresIn: '7d'
+  },
+
+  // Video Consultation Meeting Settings (Google Meet and Zoom)
+  meeting: {
+    googleMeetUrl: process.env.COMPANY_GOOGLE_MEET_URL ? process.env.COMPANY_GOOGLE_MEET_URL.trim() : '',
+    zoomUrl: process.env.COMPANY_ZOOM_URL ? process.env.COMPANY_ZOOM_URL.trim() : '',
+    defaultUrl: process.env.COMPANY_MEETING_URL ? process.env.COMPANY_MEETING_URL.trim() : ''
   }
 };
