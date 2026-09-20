@@ -83,6 +83,7 @@
     const modal = document.getElementById('booking-modal');
     if (!modal) return;
     modal.classList.add('active');
+    document.body.classList.add('modal-open');
     document.body.style.overflow = 'hidden';
     
     // Auto-select first date if not yet chosen
@@ -96,6 +97,7 @@
     const modal = document.getElementById('booking-modal');
     if (!modal) return;
     modal.classList.remove('active');
+    document.body.classList.remove('modal-open');
     document.body.style.overflow = '';
   }
 

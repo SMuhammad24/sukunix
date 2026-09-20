@@ -73,12 +73,14 @@
     function openMobileMenu() {
       mobileMenu?.classList.add('open');
       mobileOverlay?.classList.add('active');
+      document.body.classList.add('menu-open');
       document.body.style.overflow = 'hidden';
     }
 
     function closeMobileMenu() {
       mobileMenu?.classList.remove('open');
       mobileOverlay?.classList.remove('active');
+      document.body.classList.remove('menu-open');
       document.body.style.overflow = '';
     }
 
@@ -278,11 +280,12 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
           modalMetrics.innerHTML = data.metrics.map(m => `
             <div>
               <div style="font-size: 1.4rem; font-weight: 800; color: #090d1a;">${m.val}</div>
-              <div style="font-size: 0.75rem; color: #64748b; font-weight: 600; margin-top: 2px;">${m.desc}</div>
+              <div style="font-size: 0.75rem; color: #475569; font-weight: 600; margin-top: 2px;">${m.desc}</div>
             </div>
           `).join('');
 
           modal.classList.add('active');
+          document.body.classList.add('modal-open');
           document.body.style.overflow = 'hidden';
         }
       });
@@ -290,6 +293,7 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
 
     function closeModal() {
       modal.classList.remove('active');
+      document.body.classList.remove('modal-open');
       document.body.style.overflow = '';
     }
 

@@ -86,9 +86,17 @@ app.use(express.static(path.join(__dirname), {
   maxAge: config.nodeEnv === 'production' ? '1d' : '0'
 }));
 
-// Route root to index.html
+// Frontend Page Routes
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/case-studies', (req, res) => {
+  res.sendFile(path.join(__dirname, 'case-studies.html'));
+});
+
+app.get('/calculator', (req, res) => {
+  res.sendFile(path.join(__dirname, 'calculator.html'));
 });
 
 // Fallback 404 handler for unmatched /api routes
