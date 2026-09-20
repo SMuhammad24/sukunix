@@ -133,8 +133,9 @@
     });
   }
 
-  // Support both http://localhost:3000/admin and direct file:/// opening
-  const API_BASE = (window.location.protocol === 'file:') ? 'http://localhost:3000' : '';
+  // Support http://localhost:3000/admin, VS Code Live Server (port 5500, 5501, etc.), and file:///
+  const isLocalDevServer = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && window.location.port !== '3000';
+  const API_BASE = (window.location.protocol === 'file:' || isLocalDevServer) ? 'http://localhost:3000' : '';
 
   // API Client with Auth Header
   async function apiFetch(endpoint, options = {}) {
@@ -154,8 +155,8 @@
         headers
       });
 
-      if (response.status === 401) {
-        // Expired or invalid token
+      if (response.status === 401 && !endpoint.includes('/login')) {
+        // Expired or invalid token on protected endpoints
         logout();
         throw new Error('Your administrative session has expired. Please log in again.');
       }
@@ -163,7 +164,11 @@
       const data = await response.json();
       return { ok: response.ok, status: response.status, data };
     } catch (err) {
-      return { ok: false, error: err.message };
+      const isConnError = err.message && (err.message.includes('fetch') || err.message.includes('Failed to fetch') || err.message.includes('NetworkError'));
+      const errorMsg = isConnError
+        ? 'Cannot connect to Sukunix backend server (http://localhost:3000). Please ensure "npm start" or "node server.js" is running.'
+        : err.message;
+      return { ok: false, error: errorMsg };
     }
   }
 

@@ -41,9 +41,9 @@ router.post('/login', (req, res) => {
     const expectedEmail = config.admin.email.trim().toLowerCase();
     const expectedPassword = config.admin.password;
 
-    // Strictly check credentials
+    // Strictly check credentials (allowing trimmed comparison to prevent accidental space errors)
     const isEmailValid = (trimmedEmail === expectedEmail);
-    const isPasswordValid = (password === expectedPassword);
+    const isPasswordValid = (password === expectedPassword || password.trim() === expectedPassword.trim());
 
     if (!isEmailValid || !isPasswordValid) {
       return res.status(401).json({
