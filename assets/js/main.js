@@ -521,17 +521,16 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
           &bull; Cloud Infrastructure &amp; Multi-AZ CI/CD: <strong>2 &ndash; 3 Weeks</strong><br>
           &bull; AI / Vector RAG Pipeline Integration: <strong>3 &ndash; 4 Weeks</strong><br>
           &bull; Team: 1 Senior Principal Architect + 3 Dedicated Staff Pod Engineers<br>
-          💡 <em>Tip: Use 'sukunix book-call' or click the estimator to lock your sprint slot.</em></div>`, 'info');
+          💡 <em>Tip: Use 'sukunix contact' or click below to chat on WhatsApp.</em></div>`, 'info');
         }, 350);
         return;
       }
 
-      if (normalized.startsWith('sukunix book') || normalized === 'book') {
-        appendLine(`<span class="cli-info">📅 Launching Senior Architect Discovery Consultation Portal...</span>`, 'info');
+      if (normalized.startsWith('sukunix book') || normalized === 'book' || normalized.startsWith('sukunix contact') || normalized === 'contact') {
+        appendLine(`<span class="cli-info">💬 Connecting directly to Sukunix Engineering...</span>`, 'info');
         setTimeout(() => {
-          appendLine(`✔ Zoom credentials generated &bull; Opening schedule modal...`, 'success');
-          const modalTrigger = document.querySelector('.trigger-booking-modal');
-          if (modalTrigger) modalTrigger.click();
+          appendLine(`✔ Opening direct WhatsApp chat with Engineering Pod (+91 8866279140)...`, 'success');
+          window.open('https://wa.me/918866279140?text=Hello%20Sukunix%20Team%2C%20I%20would%20like%20to%20discuss%20a%20project.', '_blank', 'noopener');
         }, 400);
         return;
       }

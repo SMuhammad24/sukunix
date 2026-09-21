@@ -309,38 +309,20 @@
       });
     });
 
-    // Book Consultation for this configured plan button
+    // Contact on WhatsApp for this configured plan button
     const bookConfiguredBtn = document.getElementById('book-configured-plan');
     if (bookConfiguredBtn) {
       bookConfiguredBtn.addEventListener('click', () => {
         const costText = document.getElementById('estimate-cost-display')?.textContent || 'Custom Scope';
-        let planLabel = 'Custom Plan (' + costText + ')';
+        const timelineText = document.getElementById('estimate-time-display')?.textContent || '';
+        let planLabel = 'Custom Scope (' + costText + (timelineText ? ', ' + timelineText : '') + ')';
         if (estimatorState.currentPreset && presets[estimatorState.currentPreset]) {
-          planLabel = presets[estimatorState.currentPreset].serviceValue;
+          planLabel = presets[estimatorState.currentPreset].name + ' (' + costText + (timelineText ? ', ' + timelineText : '') + ')';
         }
 
-        const serviceSelect = document.getElementById('bk-service');
-        if (serviceSelect) {
-          let found = false;
-          for (let i = 0; i < serviceSelect.options.length; i++) {
-            if (serviceSelect.options[i].value.includes(planLabel.split(' ')[0])) {
-              serviceSelect.selectedIndex = i;
-              found = true;
-              break;
-            }
-          }
-          if (!found) {
-            const opt = new Option(planLabel, planLabel, true, true);
-            serviceSelect.add(opt);
-          }
-        }
-
-        if (window.openConsultationBooking) {
-          window.openConsultationBooking();
-        } else {
-          const modal = document.getElementById('booking-modal');
-          if (modal) modal.classList.add('active');
-        }
+        const msg = `Hello Sukunix Team, I configured an estimate on your website for: ${planLabel}. I would like to discuss this project.`;
+        const waUrl = `https://wa.me/918866279140?text=${encodeURIComponent(msg)}`;
+        window.open(waUrl, '_blank', 'noopener');
       });
     }
 
