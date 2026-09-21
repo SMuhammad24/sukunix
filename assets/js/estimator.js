@@ -16,7 +16,7 @@
       timeline: 'standard',
       priceDisplay: '₹25,000 – ₹40,000',
       weeksDisplay: '2 - 3 Weeks Delivery',
-      serviceValue: 'Basic Plan (₹25,000 - ₹40,000)'
+      serviceValue: 'Basic Plan'
     },
     advance: {
       name: 'Advance Plan',
@@ -26,7 +26,7 @@
       timeline: 'standard',
       priceDisplay: '₹60,000 – ₹95,000',
       weeksDisplay: '4 - 6 Weeks Delivery',
-      serviceValue: 'Advance Plan (₹60,000 - ₹95,000)'
+      serviceValue: 'Advance Plan'
     },
     premium: {
       name: 'Premium Plan',
@@ -36,7 +36,7 @@
       timeline: 'standard',
       priceDisplay: '₹1,80,000 – ₹3,00,000+',
       weeksDisplay: '8 - 12 Weeks Delivery',
-      serviceValue: 'Premium Plan (₹1,80,000 - ₹3,00,000+)'
+      serviceValue: 'Premium Plan'
     }
   };
 

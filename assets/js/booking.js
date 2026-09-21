@@ -401,7 +401,7 @@
       submitBtn.setAttribute('disabled', 'true');
       submitBtn.innerHTML = `
         <div class="booking-spinner"></div>
-        <span>Generating ${platformLabel} Link & Calendar Invite...</span>
+        <span>Confirming Consultation & Calendar Slot...</span>
       `;
     }
 
@@ -489,7 +489,7 @@
     goToStep(3);
 
     if (window.showToast) {
-      window.showToast('Consultation locked! Automatic meeting room link created.', 'success');
+      window.showToast('Consultation locked! Calendar invitation confirmed.', 'success');
     }
 
     if (submitBtn) {
@@ -511,6 +511,12 @@
     const nameEl = document.getElementById('conf-client-name');
     if (nameEl) nameEl.textContent = details.client.name;
 
+    const companyEl = document.getElementById('conf-company-name');
+    if (companyEl) companyEl.textContent = details.client.company || 'Undisclosed Firm';
+
+    const serviceEl = document.getElementById('conf-service-name');
+    if (serviceEl) serviceEl.textContent = details.client.service || 'Consultation Session';
+
     const meetingIdEl = document.getElementById('conf-meeting-id');
     if (meetingIdEl) meetingIdEl.textContent = details.meetingId;
 
@@ -526,25 +532,11 @@
     const joinBtn = document.getElementById('conf-direct-join-btn');
     if (joinBtn) {
       joinBtn.href = details.zoomLink;
-      const btnSpan = joinBtn.querySelector('span');
-      if (btnSpan) {
-        if (details.zoomLink.includes('meet.google.com')) {
-          btnSpan.textContent = 'Join Google Meet Directly';
-        } else if (details.zoomLink.includes('zoom.us')) {
-          btnSpan.textContent = 'Join Zoom Call Directly';
-        } else {
-          btnSpan.textContent = 'Join Live Consultation Room';
-        }
-      }
     }
 
     const badgeEl = document.querySelector('.zoom-badge span:last-child');
     if (badgeEl) {
-      if (details.platform === 'Zoom' || (details.zoomLink && details.zoomLink.includes('zoom.us'))) {
-        badgeEl.textContent = 'OFFICIAL ZOOM MEETING READY';
-      } else {
-        badgeEl.textContent = 'GOOGLE MEET READY';
-      }
+      badgeEl.textContent = 'CONSULTATION SLOT LOCKED';
     }
 
     const waAlertNumber = document.getElementById('conf-wa-target');
@@ -556,8 +548,7 @@
     if (waChatBtn) {
       // Connect directly to Sukunix Company WhatsApp: +91 8866279140
       const companyWhatsApp = '918866279140';
-      const platformName = details.platform || (details.zoomLink && details.zoomLink.includes('zoom.us') ? 'Zoom' : 'Google Meet');
-      const msg = `Hello Sukunix Team, I have booked an Architecture Discovery Session!\n\nReference: ${details.bookingRef}\nSlot: ${details.dateFormatted} at ${details.time} (${details.timezone})\nPlatform: ${platformName}\nMeeting Link: ${details.zoomLink}\nAttendee: ${details.client.name} (${details.client.company})\nFocus: ${details.client.service}\n\nLooking forward to our consultation.`;
+      const msg = `Hello Sukunix Team, I have booked an Architecture Discovery Session!\n\nReference: ${details.bookingRef}\nSlot: ${details.dateFormatted} at ${details.time} (${details.timezone})\nAttendee: ${details.client.name} (${details.client.company})\nFocus: ${details.client.service}\n\nLooking forward to our consultation.`;
       waChatBtn.href = `https://wa.me/${companyWhatsApp}?text=${encodeURIComponent(msg)}`;
     }
   }
@@ -587,8 +578,7 @@
     const endStr = formatIcsDate(endLocal);
     const nowStr = formatIcsDate(new Date());
 
-    const platformName = details.platform || (details.zoomLink && details.zoomLink.includes('zoom.us') ? 'Zoom' : 'Google Meet');
-    const description = `Sukunix Architecture Discovery Consultation\\n\\nPlatform: ${platformName}\\nMeeting Link: ${details.zoomLink}\\nMeeting ID: ${details.meetingId}\\nPasscode: ${details.passcode}\\nBooking Ref: ${details.bookingRef}\\nSystem Focus: ${details.client.service}\\nAttendee: ${details.client.name} (${details.client.company})`;
+    const description = `Sukunix Architecture Discovery Consultation\\n\\nBooking Ref: ${details.bookingRef}\\nSystem Focus: ${details.client.service}\\nAttendee: ${details.client.name} (${details.client.company})`;
 
     const icsContent = [
       'BEGIN:VCALENDAR',
@@ -601,9 +591,9 @@
       `DTSTAMP:${nowStr}`,
       `DTSTART:${startStr}`,
       `DTEND:${endStr}`,
-      `SUMMARY:Sukunix Enterprise Discovery Call (${platformName}): ${details.client.name}`,
+      `SUMMARY:Sukunix Architecture Discovery Call: ${details.client.name}`,
       `DESCRIPTION:${description}`,
-      `LOCATION:${platformName} (${details.zoomLink})`,
+      `LOCATION:Online Consultation`,
       'STATUS:CONFIRMED',
       'ORGANIZER;CN=Sukunix Architecture Team:mailto:consult@sukunix.com',
       `ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=${details.client.name}:mailto:${details.client.email}`,
