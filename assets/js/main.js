@@ -941,7 +941,82 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
   }
 
   // -------------------------------------------------------------------------
-  // 14. Initialize on DOM Ready
+  // 14. Interactive 3D Package Flip Cards Engine
+  // -------------------------------------------------------------------------
+  function init3DFlipCards() {
+    const flipCards = document.querySelectorAll('.pkg-card-3d');
+    if (!flipCards.length) return;
+
+    flipCards.forEach((card) => {
+      const frontSide = card.querySelector('.pkg-side-front');
+      const backSide = card.querySelector('.pkg-side-back');
+      const toBackBtns = card.querySelectorAll('.btn-flip-to-back, .btn-flip-hint');
+      const toFrontBtns = card.querySelectorAll('.btn-flip-back');
+
+      // Flip to Back
+      const flipToBack = (e) => {
+        if (e) e.stopPropagation();
+        card.classList.add('is-flipped');
+      };
+
+      // Flip to Front
+      const flipToFront = (e) => {
+        if (e) e.stopPropagation();
+        card.classList.remove('is-flipped');
+      };
+
+      // Front card click flips it
+      if (frontSide) {
+        frontSide.addEventListener('click', flipToBack);
+      }
+
+      toBackBtns.forEach((btn) => {
+        btn.addEventListener('click', flipToBack);
+      });
+
+      toFrontBtns.forEach((btn) => {
+        btn.addEventListener('click', flipToFront);
+      });
+
+      // Protect all action buttons inside the back side from triggering unintentional flips
+      if (backSide) {
+        const backActionElements = backSide.querySelectorAll(
+          'button:not(.btn-flip-back), a, input, select'
+        );
+        backActionElements.forEach((el) => {
+          el.addEventListener('click', (e) => {
+            e.stopPropagation();
+          });
+        });
+      }
+    });
+
+    // Global "Flip All Plans" button
+    const toggleAllBtns = document.querySelectorAll('#toggle-all-plans-btn');
+    toggleAllBtns.forEach((btn) => {
+      let isAllFlipped = false;
+      btn.addEventListener('click', () => {
+        isAllFlipped = !isAllFlipped;
+        flipCards.forEach((card) => {
+          if (isAllFlipped) {
+            card.classList.add('is-flipped');
+          } else {
+            card.classList.remove('is-flipped');
+          }
+        });
+
+        const toggleText = btn.querySelector('#toggle-plans-text');
+        if (toggleText) {
+          toggleText.textContent = isAllFlipped
+            ? 'Show Plan Covers (Flip Back)'
+            : 'Flip All Plans (View Features)';
+        }
+      });
+    });
+  }
+
+  // -------------------------------------------------------------------------
+  // 15. Initialize on DOM Ready
   // -------------------------------------------------------------------------
   document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
@@ -956,5 +1031,6 @@ rag = <span class="code-fn">VectorRAGPipeline</span>(model=<span class="code-str
     initFaqAccordion();
     initContactForm();
     initFooterInteractions();
+    init3DFlipCards();
   });
 })();
